@@ -1,1 +1,1 @@
-export const offersNumber = 6;
+export const offersNumber = 6

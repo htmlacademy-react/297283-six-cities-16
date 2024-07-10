@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Денис Оболевич](https://up.htmlacademy.ru/react/16/user/297283).
-* Наставник: [Артур Литовко](https://github.com/baileys-li).
+- Студент: [Денис Оболевич](https://up.htmlacademy.ru/react/16/user/297283).
+- Наставник: [Артур Литовко](https://github.com/baileys-li).
 
 ---
 
