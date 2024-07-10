@@ -1,7 +1,10 @@
 import PlaceCard from '../../place-card/place-card'
 import { AppProps } from '../../../components/app/app'
+import { PlaceCard as PlaceCardType } from '../../../pages/main/main'
 
-export default function Places({ offersNumber }: AppProps): JSX.Element {
+type PlacesProps = AppProps & { cards: PlaceCardType[] }
+
+export default function Places({ offersNumber, cards }: PlacesProps): JSX.Element {
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Places</h2>
@@ -30,9 +33,11 @@ export default function Places({ offersNumber }: AppProps): JSX.Element {
 				</ul>
 			</form>
 			<div className="cities__places-list places__list tabs__content">
-				{Array.from(Array(offersNumber)).map(() => (
-					<PlaceCard key={crypto.randomUUID()} />
-				))}
+				{cards
+					.filter((_, i) => i < offersNumber)
+					.map((card) => (
+						<PlaceCard key={card.id} place={card} />
+					))}
 			</div>
 		</section>
 	)
