@@ -14,7 +14,7 @@ module.exports = {
 	plugins: ['react-refresh'],
 	rules: {
 		'react-refresh/only-export-components': 'warn',
-		'@typescript-eslint/member-delimiter-style': 'none',
+		'@typescript-eslint/member-delimiter-style': 'off',
 		semi: 'off',
 		indent: 'off'
 	},
