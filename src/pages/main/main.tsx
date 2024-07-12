@@ -4,36 +4,11 @@ import Places from '../../components/main/places/places'
 import EmptyPlaces from '../../components/main/empty-places/empty-places'
 import Map from '../../components/main/map/map'
 import placesMock from '../../mock/places'
+import { PlaceCard } from '../../types/place'
 
 type MainProps = {
 	offersNumber: number
 }
-
-interface Place {
-	id: string
-	title: string
-	type: string
-	price: number
-	city: {
-		name: string
-		location: {
-			latitude: number
-			longitude: number
-			zoom: number
-		}
-	}
-	location: {
-		latitude: number
-		longitude: number
-		zoom: number
-	}
-	isFavorite: boolean
-	isPremium: boolean
-	rating: number
-	previewImage: string
-}
-
-export type PlaceCard = Omit<Place, 'city' | 'location'>
 
 export default function Main({ offersNumber }: MainProps): JSX.Element {
 	const isEmptyPlaces = false
