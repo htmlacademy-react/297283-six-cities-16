@@ -1,4 +1,4 @@
-import { PlaceCard as PlaceCardType } from '../../pages/main/main'
+import { PlaceCard as PlaceCardType } from '../../types/place'
 
 type PlacesProps = {
 	place: PlaceCardType

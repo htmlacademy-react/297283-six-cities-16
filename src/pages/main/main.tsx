@@ -6,11 +6,11 @@ import Map from '../../components/main/map/map'
 import placesMock from '../../mock/places'
 import { PlaceCard } from '../../types/place'
 
-type MainProps = {
+export type MainPageProps = {
 	offersNumber: number
 }
 
-export default function Main({ offersNumber }: MainProps): JSX.Element {
+export default function Main({ offersNumber }: MainPageProps): JSX.Element {
 	const isEmptyPlaces = false
 
 	const cards: PlaceCard[] = placesMock.map((place) => ({
