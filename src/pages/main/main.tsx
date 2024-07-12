@@ -3,8 +3,11 @@ import Tabs from '../../components/tabs/tabs'
 import Places from '../../components/main/places/places'
 import EmptyPlaces from '../../components/main/empty-places/empty-places'
 import Map from '../../components/main/map/map'
-import { AppProps } from '../../components/app/app'
 import placesMock from '../../mock/places'
+
+type MainProps = {
+	offersNumber: number
+}
 
 interface Place {
 	id: string
@@ -32,7 +35,7 @@ interface Place {
 
 export type PlaceCard = Omit<Place, 'city' | 'location'>
 
-export default function Main({ offersNumber }: AppProps): JSX.Element {
+export default function Main({ offersNumber }: MainProps): JSX.Element {
 	const isEmptyPlaces = false
 
 	const cards: PlaceCard[] = placesMock.map((place) => ({
