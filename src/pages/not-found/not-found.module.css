@@ -1,0 +1,23 @@
+.error-page {
+	width: 100dvw;
+	height: 100dvh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: #ececec;
+}
+
+.error-page b {
+	font-size: 40px;
+}
+
+.error-page span {
+	font-size: 20px;
+}
+
+.error-page a {
+	margin-top: 8px;
+	font-size: 16px;
+	text-decoration: underline;
+}
