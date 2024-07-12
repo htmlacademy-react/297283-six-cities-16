@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import Header from '../../components/header/header'
 import Tabs from '../../components/tabs/tabs'
 import Places from '../../components/main/places/places'
@@ -27,11 +28,11 @@ export default function Main({ offersNumber }: MainPageProps): JSX.Element {
 	return (
 		<div className="page page--gray page--main">
 			<Header />
-			<main className={`page__main page__main--index ${isEmptyPlaces ? 'page__main--index-empty' : ''}`}>
+			<main className={classNames('page__main page__main--index', { 'page__main--index-empty': isEmptyPlaces })}>
 				<h1 className="visually-hidden">Cities</h1>
 				<Tabs />
 				<div className="cities">
-					<div className={`cities__places-container container ${isEmptyPlaces ? 'cities__places-container--empty' : ''}`}>
+					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyPlaces })}>
 						{isEmptyPlaces ? <EmptyPlaces /> : <Places offersNumber={offersNumber} cards={cards} />}
 						<div className="cities__right-section">{!isEmptyPlaces && <Map />}</div>
 					</div>

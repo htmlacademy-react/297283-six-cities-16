@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { PlaceCard as PlaceCardType } from '../../types/place'
 
 type PlacesProps = {
@@ -24,7 +25,7 @@ export default function PlaceCard({ place }: PlacesProps): JSX.Element {
 						<span className="place-card__price-text">/&nbsp;night</span>
 					</div>
 					<button
-						className={`place-card__bookmark-button button ${place.isFavorite ? 'place-card__bookmark-button--active' : ''}`}
+						className={classNames('place-card__bookmark-button button', { 'place-card__bookmark-button--active': place.isFavorite })}
 						type="button"
 					>
 						<svg className="place-card__bookmark-icon" width={18} height={19}>

@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
 import Section from '../../components/favorites/section/section'
@@ -7,9 +8,9 @@ export default function Favorites(): JSX.Element {
 	const isEmptyFavorites = false
 
 	return (
-		<div className={`page ${isEmptyFavorites ? 'page--favorites-empty' : ''}`}>
+		<div className={classNames('page', { 'page--favorites-empty': isEmptyFavorites })}>
 			<Header />
-			<main className={`page__main page__main--favorites ${isEmptyFavorites ? 'page__main--favorites-empty' : ''}`}>
+			<main className={classNames('page__main page__main--favorites', { 'page__main--favorites-empty': isEmptyFavorites })}>
 				<div className="page__favorites-container container">{isEmptyFavorites ? <EmptyCards /> : <Section />}</div>
 			</main>
 			<Footer />
