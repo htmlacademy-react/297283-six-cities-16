@@ -1,16 +1,26 @@
+import classNames from 'classnames'
+import { Link, useLocation } from 'react-router-dom'
+
 type HeaderProps = {
 	showNav?: boolean
 }
 
 export default function Header({ showNav = true }: HeaderProps): JSX.Element {
+	const location = useLocation()
+	const isMainPage = location.pathname === '/'
+
 	return (
 		<header className="header">
 			<div className="container">
 				<div className="header__wrapper">
 					<div className="header__left">
-						<a className="header__logo-link header__logo-link--active">
+						<Link
+							to="/"
+							className={classNames('header__logo-link', { 'header__logo-link--active': isMainPage })}
+							style={{ pointerEvents: isMainPage ? 'none' : undefined }}
+						>
 							<img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-						</a>
+						</Link>
 					</div>
 					{showNav && (
 						<nav className="header__nav">

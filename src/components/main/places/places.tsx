@@ -1,8 +1,8 @@
 import PlaceCard from '../../place-card/place-card'
-import { AppProps } from '../../../components/app/app'
-import { PlaceCard as PlaceCardType } from '../../../pages/main/main'
+import { MainPageProps } from '../../../pages/main/main'
+import { PlaceCard as PlaceCardType } from '../../../types/place'
 
-type PlacesProps = AppProps & { cards: PlaceCardType[] }
+type PlacesProps = MainPageProps & { cards: PlaceCardType[] }
 
 export default function Places({ offersNumber, cards }: PlacesProps): JSX.Element {
 	return (
