@@ -1,4 +1,4 @@
-export interface Place {
+export interface Offer {
 	id: string
 	title: string
 	type: string
@@ -22,4 +22,4 @@ export interface Place {
 	previewImage: string
 }
 
-export type PlaceCard = Omit<Place, 'city' | 'location'>
+export type OfferCard = Omit<Offer, 'city' | 'location'>

@@ -1,13 +1,13 @@
-import PlaceCard from '../../place-card/place-card'
+import OfferCard from '../../offer-card/offer-card'
 import { MainPageProps } from '../../../pages/main/main'
-import { PlaceCard as PlaceCardType } from '../../../types/place'
+import { OfferCard as OfferCardType } from '../../../types/offer'
 
-type PlacesProps = MainPageProps & { cards: PlaceCardType[] }
+type OffersProps = MainPageProps & { cards: OfferCardType[] }
 
-export default function Places({ offersNumber, cards }: PlacesProps): JSX.Element {
+export default function Offers({ offersNumber, cards }: OffersProps): JSX.Element {
 	return (
 		<section className="cities__places places">
-			<h2 className="visually-hidden">Places</h2>
+			<h2 className="visually-hidden">Offers</h2>
 			<b className="places__found">312 places to stay in Amsterdam</b>
 			<form className="places__sorting" action="#" method="get">
 				<span className="places__sorting-caption">Sort by</span>
@@ -36,7 +36,7 @@ export default function Places({ offersNumber, cards }: PlacesProps): JSX.Elemen
 				{cards
 					.filter((_, i) => i < offersNumber)
 					.map((card) => (
-						<PlaceCard key={card.id} place={card} />
+						<OfferCard key={card.id} offer={card} />
 					))}
 			</div>
 		</section>
