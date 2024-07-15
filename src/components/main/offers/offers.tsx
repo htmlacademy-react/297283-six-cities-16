@@ -1,10 +1,13 @@
 import OfferCard from '../../offer-card/offer-card'
-import { MainPageProps } from '../../../pages/main/main'
 import { OfferCard as OfferCardType } from '../../../types/offer'
 
-type OffersProps = MainPageProps & { cards: OfferCardType[] }
+type OffersProps = {
+	offersNumber: number
+	cards: OfferCardType[]
+	setActiveOfferId: (id: string) => void
+}
 
-export default function Offers({ offersNumber, cards }: OffersProps): JSX.Element {
+export default function Offers({ offersNumber, cards, setActiveOfferId }: OffersProps): JSX.Element {
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
@@ -36,7 +39,7 @@ export default function Offers({ offersNumber, cards }: OffersProps): JSX.Elemen
 				{cards
 					.filter((_, i) => i < offersNumber)
 					.map((card) => (
-						<OfferCard key={card.id} offer={card} />
+						<OfferCard key={card.id} offer={card} setActiveOfferId={() => setActiveOfferId(card.id)} />
 					))}
 			</div>
 		</section>

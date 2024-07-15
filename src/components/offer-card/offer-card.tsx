@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import { OfferCard as OfferCardType } from '../../types/offer'
 
-type OffersProps = {
+type OfferCardProps = {
 	offer: OfferCardType
+	setActiveOfferId?: () => void
 }
 
-export default function OfferCard({ offer }: OffersProps): JSX.Element {
+export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): JSX.Element {
 	return (
-		<article className="cities__card place-card">
+		<article className="cities__card place-card" onMouseEnter={setActiveOfferId}>
 			{offer.isPremium && (
 				<div className="place-card__mark">
 					<span>Premium</span>
