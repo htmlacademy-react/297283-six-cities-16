@@ -6,13 +6,11 @@ import Offer from './pages/offer/offer'
 import NotFound from './pages/not-found/not-found'
 import PrivateRoute from './components/private-route/private-route'
 
-import { offersNumber } from './const'
-
 const router = createBrowserRouter([
 	{
 		children: [
 			{
-				element: <Main offersNumber={offersNumber} />,
+				element: <Main />,
 				index: true
 			},
 			{

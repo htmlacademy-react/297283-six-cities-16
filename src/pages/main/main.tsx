@@ -4,14 +4,11 @@ import Tabs from '../../components/tabs/tabs'
 import Offers from '../../components/main/offers/offers'
 import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/main/map/map'
-import offersMock from '../../mocks/offers'
 import { OfferCard } from '../../types/offer'
+import { offersNumber } from '../../const'
+import offersMock from '../../mocks/offers'
 
-export type MainPageProps = {
-	offersNumber: number
-}
-
-export default function Main({ offersNumber }: MainPageProps): JSX.Element {
+export default function Main(): JSX.Element {
 	const isEmptyOffers = false
 
 	const cards: OfferCard[] = offersMock.map((offer) => ({
