@@ -5,7 +5,6 @@ import Offers from '../../components/main/offers/offers'
 import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/main/map/map'
 import { OfferCard } from '../../types/offer'
-import { offersNumber } from '../../const'
 import offersMock from '../../mocks/offers'
 import { useState } from 'react'
 
@@ -32,11 +31,7 @@ export default function Main(): JSX.Element {
 				<Tabs />
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
-						{isEmptyOffers ? (
-							<EmptyOffers />
-						) : (
-							<Offers offersNumber={offersNumber} cards={cards} setActiveOfferId={(id) => setActiveOfferId(id)} />
-						)}
+						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={cards} setActiveOfferId={(id) => setActiveOfferId(id)} />}
 						<div className="cities__right-section">{!isEmptyOffers && <Map activeOfferId={activeOfferId} />}</div>
 					</div>
 				</div>

@@ -20,7 +20,7 @@ const router = createBrowserRouter([
 			{
 				path: 'favorites',
 				element: (
-					<PrivateRoute hasAccess={false}>
+					<PrivateRoute hasAccess>
 						<Favorites />
 					</PrivateRoute>
 				)

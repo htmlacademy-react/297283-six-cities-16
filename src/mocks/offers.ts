@@ -52,7 +52,7 @@ export default [
 		price: 535,
 		previewImage: 'https://16.design.htmlacademy.pro/static/hotel/12.jpg',
 		city: {
-			name: 'Paris',
+			name: 'Brussels',
 			location: {
 				latitude: 48.85661,
 				longitude: 2.351499,
@@ -98,7 +98,7 @@ export default [
 		price: 258,
 		previewImage: 'https://16.design.htmlacademy.pro/static/hotel/9.jpg',
 		city: {
-			name: 'Paris',
+			name: 'Amsterdam',
 			location: {
 				latitude: 48.85661,
 				longitude: 2.351499,
