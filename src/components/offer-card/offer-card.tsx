@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { OfferCard as OfferCardType } from '../../types/offer'
+import { Link } from 'react-router-dom'
 
 type OfferCardProps = {
 	offer: OfferCardType
@@ -15,9 +16,9 @@ export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): 
 				</div>
 			)}
 			<div className="cities__image-wrapper place-card__image-wrapper">
-				<a href={`/offer/${offer.id}`}>
+				<Link to={`/offer/${offer.id}`}>
 					<img className="place-card__image" src={offer.previewImage} width={260} height={200} alt={offer.title} />
-				</a>
+				</Link>
 			</div>
 			<div className="place-card__info">
 				<div className="place-card__price-wrapper">
@@ -42,7 +43,7 @@ export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): 
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<a href={`/offer/${offer.id}`}>{offer.title}</a>
+					<Link to={`/offer/${offer.id}`}>{offer.title}</Link>
 				</h2>
 				<p className="place-card__type">{offer.type[0].toUpperCase() + offer.type.slice(1)}</p>
 			</div>
