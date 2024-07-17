@@ -5,7 +5,7 @@ import ReviewForm from '../../components/offer/review-form/review-form'
 import Map from '../../components/offer/map/map'
 import Info from '../../components/offer/info/info'
 import Host from '../../components/offer/host/host'
-import NearPlaces from '../../components/near-places/near-places'
+import NearOffers from '../../components/near-offers/near-offers'
 
 export default function Favorites(): JSX.Element {
 	const isLoggedIn = true
@@ -34,7 +34,7 @@ export default function Favorites(): JSX.Element {
 					<Map />
 				</section>
 				<div className="container">
-					<NearPlaces />
+					<NearOffers />
 				</div>
 			</main>
 		</div>

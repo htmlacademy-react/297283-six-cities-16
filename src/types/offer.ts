@@ -1,10 +1,12 @@
-export interface Place {
+import { Cities } from './location'
+
+export interface Offer {
 	id: string
 	title: string
 	type: string
 	price: number
 	city: {
-		name: string
+		name: Cities
 		location: {
 			latitude: number
 			longitude: number
@@ -22,4 +24,6 @@ export interface Place {
 	previewImage: string
 }
 
-export type PlaceCard = Omit<Place, 'city' | 'location'>
+export type OfferCard = Omit<Offer, 'city' | 'location'>
+
+export type OfferCardWithCity = OfferCard & { city: Cities }

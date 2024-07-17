@@ -1,13 +1,16 @@
-import PlaceCard from '../../place-card/place-card'
-import { MainPageProps } from '../../../pages/main/main'
-import { PlaceCard as PlaceCardType } from '../../../types/place'
+import OfferCard from '../../offer-card/offer-card'
+import { OfferCard as OfferCardType } from '../../../types/offer'
+import { OFFERS_NUMBER } from '../../../const'
 
-type PlacesProps = MainPageProps & { cards: PlaceCardType[] }
+type OffersProps = {
+	cards: OfferCardType[]
+	setActiveOfferId: (id: string) => void
+}
 
-export default function Places({ offersNumber, cards }: PlacesProps): JSX.Element {
+export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.Element {
 	return (
 		<section className="cities__places places">
-			<h2 className="visually-hidden">Places</h2>
+			<h2 className="visually-hidden">Offers</h2>
 			<b className="places__found">312 places to stay in Amsterdam</b>
 			<form className="places__sorting" action="#" method="get">
 				<span className="places__sorting-caption">Sort by</span>
@@ -34,9 +37,9 @@ export default function Places({ offersNumber, cards }: PlacesProps): JSX.Elemen
 			</form>
 			<div className="cities__places-list places__list tabs__content">
 				{cards
-					.filter((_, i) => i < offersNumber)
+					.filter((_, i) => i < OFFERS_NUMBER)
 					.map((card) => (
-						<PlaceCard key={card.id} place={card} />
+						<OfferCard key={card.id} offer={card} setActiveOfferId={() => setActiveOfferId(card.id)} />
 					))}
 			</div>
 		</section>

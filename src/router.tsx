@@ -6,14 +6,11 @@ import Offer from './pages/offer/offer'
 import NotFound from './pages/not-found/not-found'
 import PrivateRoute from './components/private-route/private-route'
 
-// Возможно это правильнее прокидывать из index.tsx, но я не понял как
-import { offersNumber } from './const'
-
 const router = createBrowserRouter([
 	{
 		children: [
 			{
-				element: <Main offersNumber={offersNumber} />,
+				element: <Main />,
 				index: true
 			},
 			{
@@ -23,7 +20,7 @@ const router = createBrowserRouter([
 			{
 				path: 'favorites',
 				element: (
-					<PrivateRoute hasAccess={false}>
+					<PrivateRoute hasAccess>
 						<Favorites />
 					</PrivateRoute>
 				)
@@ -39,35 +36,5 @@ const router = createBrowserRouter([
 		]
 	}
 ])
-
-// Вариант из доки почему-то не захотел работать. Ошибок нет, но всегда главная висит
-// const router = createBrowserRouter([
-// 	{
-// 		path: '/',
-// 		element: <Main offersNumber={offersNumber} />,
-// 		children: [
-// 			{
-// 				path: 'login',
-// 				element: <Login />
-// 			},
-// 			{
-// 				path: 'favorites',
-// 				element: (
-// 					<PrivateRoute hasAccess={false}>
-// 						<Favorites />
-// 					</PrivateRoute>
-// 				)
-// 			},
-// 			{
-// 				path: 'offer/:id',
-// 				element: <Offer />
-// 			},
-// 			{
-// 				path: '*',
-// 				element: <NotFound />
-// 			}
-// 		]
-// 	}
-// ])
 
 export default router

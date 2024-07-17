@@ -1,25 +1,26 @@
 import classNames from 'classnames'
-import { OfferCard } from '../../../types/offer'
+import { OfferCard as OfferCardType } from '../../types/offer'
 import { Link } from 'react-router-dom'
 
 type OfferCardProps = {
-	offer: OfferCard
+	offer: OfferCardType
+	setActiveOfferId?: () => void
 }
 
-export default function Card({ offer }: OfferCardProps): JSX.Element {
+export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): JSX.Element {
 	return (
-		<article className="favorites__card place-card">
+		<article className="cities__card place-card" onMouseEnter={setActiveOfferId}>
 			{offer.isPremium && (
 				<div className="place-card__mark">
 					<span>Premium</span>
 				</div>
 			)}
-			<div className="favorites__image-wrapper place-card__image-wrapper">
+			<div className="cities__image-wrapper place-card__image-wrapper">
 				<Link to={`/offer/${offer.id}`}>
-					<img className="place-card__image" src={offer.previewImage} width={150} height={110} alt={offer.title} />
+					<img className="place-card__image" src={offer.previewImage} width={260} height={200} alt={offer.title} />
 				</Link>
 			</div>
-			<div className="favorites__card-info place-card__info">
+			<div className="place-card__info">
 				<div className="place-card__price-wrapper">
 					<div className="place-card__price">
 						<b className="place-card__price-value">€{offer.price}</b>
