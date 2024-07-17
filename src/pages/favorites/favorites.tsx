@@ -5,6 +5,7 @@ import Section from '../../components/favorites/section/section'
 import EmptyCards from '../../components/favorites/empty-cards/empty-cards'
 import offersMock from '../../mocks/offers'
 import { OfferCardWithCity } from '../../types/offer'
+import { Cities } from '../../types/location'
 
 export default function Favorites(): JSX.Element {
 	const isEmptyFavorites = false
@@ -18,7 +19,7 @@ export default function Favorites(): JSX.Element {
 		isPremium: offer.isPremium,
 		rating: offer.rating,
 		previewImage: offer.previewImage,
-		city: offer.city.name
+		city: offer.city.name as Cities
 	}))
 
 	return (
