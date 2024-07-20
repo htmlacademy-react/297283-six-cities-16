@@ -5,13 +5,13 @@ type ReviewForm = {
 	comment: string
 }
 
+const RATING_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'] as const
+
 export default function ReviewForm(): JSX.Element {
 	const [reviewForm, setReviewForm] = useState<ReviewForm>({
 		rating: 0,
 		comment: ''
 	})
-
-	const ratingTitles = ['terribly', 'badly', 'not bad', 'good', 'perfect'] as const
 
 	const isDisabledForm = () => !reviewForm.rating || reviewForm.comment.length < 50
 
@@ -25,25 +25,23 @@ export default function ReviewForm(): JSX.Element {
 				Your review
 			</label>
 			<div className="reviews__rating-form form__rating">
-				{ratingTitles
-					.map((title, i) => (
-						<React.Fragment key={title}>
-							<input
-								className="form__rating-input visually-hidden"
-								onChange={(e) => setReviewForm({ ...reviewForm, rating: +e.target.value })}
-								name="rating"
-								defaultValue={i + 1}
-								id={`${i + 1}-stars`}
-								type="radio"
-							/>
-							<label htmlFor={`${i + 1}-stars`} className="reviews__rating-label form__rating-label" title={title}>
-								<svg className="form__star-image" width={37} height={33}>
-									<use xlinkHref="#icon-star" />
-								</svg>
-							</label>
-						</React.Fragment>
-					))
-					.reverse()}
+				{RATING_TITLES.map((title, i) => (
+					<React.Fragment key={title}>
+						<input
+							className="form__rating-input visually-hidden"
+							onChange={(e) => setReviewForm({ ...reviewForm, rating: +e.target.value })}
+							name="rating"
+							defaultValue={i + 1}
+							id={`${i + 1}-stars`}
+							type="radio"
+						/>
+						<label htmlFor={`${i + 1}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+							<svg className="form__star-image" width={37} height={33}>
+								<use xlinkHref="#icon-star" />
+							</svg>
+						</label>
+					</React.Fragment>
+				)).reverse()}
 			</div>
 			<textarea
 				value={reviewForm.comment}
