@@ -25,5 +25,3 @@ export interface Offer {
 }
 
 export type OfferCard = Omit<Offer, 'city' | 'location'>
-
-export type OfferCardWithCity = OfferCard & { city: Cities }

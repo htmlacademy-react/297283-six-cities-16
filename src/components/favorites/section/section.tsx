@@ -1,17 +1,17 @@
-import { OfferCardWithCity } from '../../../types/offer'
+import { Offer } from '../../../types/offer'
 import Card from '../card/card'
 import { Cities } from '../../../types/location'
 import { Link } from 'react-router-dom'
 
 type SectionProps = {
-	cards: OfferCardWithCity[]
+	cards: Offer[]
 }
 
-type GroupedByCityCards = Partial<Record<Cities, OfferCardWithCity[]>>
+type GroupedByCityCards = Partial<Record<Cities, Offer[]>>
 
 export default function Section({ cards }: SectionProps): JSX.Element {
 	const groupedByCity: GroupedByCityCards = cards.reduce<GroupedByCityCards>((prev, curr) => {
-		const groupKey = curr.city
+		const groupKey = curr.city.name
 		const group = prev[groupKey] || []
 		group.push(curr)
 		return { ...prev, [groupKey]: group }

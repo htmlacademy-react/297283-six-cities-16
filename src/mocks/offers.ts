@@ -1,4 +1,6 @@
-export default [
+import { Offer } from '../types/offer'
+
+const offers: Offer[] = [
 	{
 		id: '6779022c-ac26-4554-ac2e-227dd6349161',
 		title: 'House in countryside',
@@ -230,3 +232,5 @@ export default [
 		rating: 2.4
 	}
 ]
+
+export default offers

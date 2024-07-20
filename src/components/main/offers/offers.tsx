@@ -1,9 +1,9 @@
 import OfferCard from '../../offer-card/offer-card'
-import { OfferCard as OfferCardType } from '../../../types/offer'
+import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
 
 type OffersProps = {
-	cards: OfferCardType[]
+	cards: Offer[]
 	setActiveOfferId: (id: string) => void
 }
 
