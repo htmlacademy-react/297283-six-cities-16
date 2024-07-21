@@ -1,4 +1,4 @@
-import { Cities } from './location'
+import { Cities, Location } from './location'
 
 export interface Offer {
 	id: string
@@ -7,17 +7,9 @@ export interface Offer {
 	price: number
 	city: {
 		name: Cities
-		location: {
-			latitude: number
-			longitude: number
-			zoom: number
-		}
+		location: Location
 	}
-	location: {
-		latitude: number
-		longitude: number
-		zoom: number
-	}
+	location: Location
 	isFavorite: boolean
 	isPremium: boolean
 	rating: number
