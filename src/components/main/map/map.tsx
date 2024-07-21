@@ -4,9 +4,10 @@ import leaflet from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 type MapProps = {
-	activeOfferId: null | string
+	activeOfferId?: null | string
 	city: City
 	points: Point[]
+	extraClassName?: string
 }
 
 const DEFAULT_CUSTOM_ICON = leaflet.icon({
@@ -21,7 +22,7 @@ const ACTIVE_CUSTOM_ICON = leaflet.icon({
 	iconAnchor: [27, 39]
 })
 
-export default function Map({ activeOfferId, city, points }: MapProps): JSX.Element {
+export default function Map({ activeOfferId, city, points, extraClassName = 'cities' }: MapProps): JSX.Element {
 	const mapRef = useRef(null)
 	const isRenderedRef = useRef(false)
 	const [map, setMap] = useState<leaflet.Map | null>(null)
@@ -66,5 +67,5 @@ export default function Map({ activeOfferId, city, points }: MapProps): JSX.Elem
 		}
 	}, [map, points, activeOfferId])
 
-	return <section className="cities__map map" ref={mapRef}></section>
+	return <section className={`${extraClassName}__map map`} ref={mapRef}></section>
 }

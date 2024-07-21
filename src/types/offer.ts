@@ -1,4 +1,5 @@
 import { Cities, Location } from './location'
+import { User } from './user'
 
 export interface Offer {
 	id: string
@@ -13,7 +14,16 @@ export interface Offer {
 	isFavorite: boolean
 	isPremium: boolean
 	rating: number
-	previewImage: string
+	previewImage?: string
+}
+
+export interface OfferFull extends Offer {
+	description: string
+	bedrooms: number
+	goods: string[]
+	host: User
+	images: string[]
+	maxAdults: number
 }
 
 export type OfferCard = Omit<Offer, 'city' | 'location'>
