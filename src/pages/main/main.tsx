@@ -1,11 +1,13 @@
+import { useState } from 'react'
 import classNames from 'classnames'
 import Header from '../../components/header/header'
 import Tabs from '../../components/tabs/tabs'
 import Offers from '../../components/main/offers/offers'
 import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/main/map/map'
-import offersMock from '../../mocks/offers'
-import { useState } from 'react'
+import OFFERS_MOCK from '../../mocks/offers'
+import POINTS_MOCK from '../../mocks/points'
+import CITY_MOCK from '../../mocks/city'
 
 export default function Main(): JSX.Element {
 	const [activeOfferId, setActiveOfferId] = useState<null | string>(null)
@@ -19,8 +21,10 @@ export default function Main(): JSX.Element {
 				<Tabs />
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
-						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={offersMock} setActiveOfferId={setActiveOfferId} />}
-						<div className="cities__right-section">{!isEmptyOffers && <Map activeOfferId={activeOfferId} />}</div>
+						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={OFFERS_MOCK} setActiveOfferId={setActiveOfferId} />}
+						<div className="cities__right-section">
+							{!isEmptyOffers && <Map activeOfferId={activeOfferId} city={CITY_MOCK} points={POINTS_MOCK} />}
+						</div>
 					</div>
 				</div>
 			</main>

@@ -4,7 +4,7 @@ import { OFFERS_NUMBER } from '../../../const'
 
 type OffersProps = {
 	cards: Offer[]
-	setActiveOfferId: (id: string) => void
+	setActiveOfferId: (id: string | null) => void
 }
 
 export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.Element {
