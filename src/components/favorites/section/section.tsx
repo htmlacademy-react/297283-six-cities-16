@@ -1,5 +1,5 @@
 import { Offer } from '../../../types/offer'
-import Card from '../card/card'
+import OfferCard from '../../offer-card/offer-card'
 import { Cities } from '../../../types/location'
 import { Link } from 'react-router-dom'
 
@@ -34,7 +34,7 @@ export default function Section({ cards }: SectionProps): JSX.Element {
 							{value
 								.filter((_, i) => i < 5)
 								.map((card) => (
-									<Card key={card.id} offer={card} />
+									<OfferCard key={card.id} offer={card} extraClassName="favorites" imageSize={[150, 110]} />
 								))}
 						</div>
 					</li>
