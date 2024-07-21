@@ -39,7 +39,7 @@ export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.El
 				{cards
 					.filter((_, i) => i < OFFERS_NUMBER)
 					.map((card) => (
-						<OfferCard key={card.id} offer={card} setActiveOfferId={() => setActiveOfferId(card.id)} />
+						<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
 					))}
 			</div>
 		</section>

@@ -19,7 +19,7 @@ export default function Main(): JSX.Element {
 				<Tabs />
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
-						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={offersMock} setActiveOfferId={(id) => setActiveOfferId(id)} />}
+						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={offersMock} setActiveOfferId={setActiveOfferId} />}
 						<div className="cities__right-section">{!isEmptyOffers && <Map activeOfferId={activeOfferId} />}</div>
 					</div>
 				</div>
