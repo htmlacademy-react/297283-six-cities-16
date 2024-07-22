@@ -13,7 +13,7 @@ export default function ReviewForm(): JSX.Element {
 		comment: ''
 	})
 
-	const isDisabledForm = () => !reviewForm.rating || reviewForm.comment.length < 50
+	const isDisabledForm = !reviewForm.rating || reviewForm.comment.length < 50
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -56,7 +56,7 @@ export default function ReviewForm(): JSX.Element {
 					To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least{' '}
 					<b className="reviews__text-amount">50 characters</b>.
 				</p>
-				<button className="reviews__submit form__submit button" type="submit" disabled={isDisabledForm()}>
+				<button className="reviews__submit form__submit button" type="submit" disabled={isDisabledForm}>
 					Submit
 				</button>
 			</div>
