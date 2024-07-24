@@ -4,30 +4,53 @@ import { Link } from 'react-router-dom'
 
 type OfferCardProps = {
 	offer: OfferCardType
-	setActiveOfferId?: () => void
+	extraClassName?: string
+	imageSize?: [number, number]
+	setActiveOfferId?: (id: string | null) => void
 }
 
-export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): JSX.Element {
+export default function OfferCard({
+	offer,
+	extraClassName = 'cities',
+	imageSize = [260, 200],
+	setActiveOfferId
+}: OfferCardProps): JSX.Element {
+	const { id, title, type, price, isFavorite, isPremium, rating, previewImage } = offer
+
+	const handleMouseEnter = () => {
+		if (!setActiveOfferId) {
+			return
+		}
+		setActiveOfferId(id)
+	}
+
+	const handleMouseLeave = () => {
+		if (!setActiveOfferId) {
+			return
+		}
+		setActiveOfferId(null)
+	}
+
 	return (
-		<article className="cities__card place-card" onMouseEnter={setActiveOfferId}>
-			{offer.isPremium && (
+		<article className={`${extraClassName}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+			{isPremium && (
 				<div className="place-card__mark">
 					<span>Premium</span>
 				</div>
 			)}
-			<div className="cities__image-wrapper place-card__image-wrapper">
-				<Link to={`/offer/${offer.id}`}>
-					<img className="place-card__image" src={offer.previewImage} width={260} height={200} alt={offer.title} />
+			<div className={`${extraClassName}__image-wrapper place-card__image-wrapper`}>
+				<Link to={`/offer/${id}`}>
+					<img className="place-card__image" src={previewImage} width={imageSize[0]} height={imageSize[1]} alt={title} />
 				</Link>
 			</div>
 			<div className="place-card__info">
 				<div className="place-card__price-wrapper">
 					<div className="place-card__price">
-						<b className="place-card__price-value">€{offer.price}</b>
+						<b className="place-card__price-value">€{price}</b>
 						<span className="place-card__price-text">/&nbsp;night</span>
 					</div>
 					<button
-						className={classNames('place-card__bookmark-button button', { 'place-card__bookmark-button--active': offer.isFavorite })}
+						className={classNames('place-card__bookmark-button button', { 'place-card__bookmark-button--active': isFavorite })}
 						type="button"
 					>
 						<svg className="place-card__bookmark-icon" width={18} height={19}>
@@ -38,14 +61,14 @@ export default function OfferCard({ offer, setActiveOfferId }: OfferCardProps): 
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">
-						<span style={{ width: `${offer.rating * 20}%` }} />
+						<span style={{ width: `${rating * 20}%` }} />
 						<span className="visually-hidden">Rating</span>
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+					<Link to={`/offer/${id}`}>{title}</Link>
 				</h2>
-				<p className="place-card__type">{offer.type[0].toUpperCase() + offer.type.slice(1)}</p>
+				<p className="place-card__type">{type[0].toUpperCase() + type.slice(1)}</p>
 			</div>
 		</article>
 	)

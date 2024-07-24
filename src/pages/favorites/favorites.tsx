@@ -3,30 +3,16 @@ import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
 import Section from '../../components/favorites/section/section'
 import EmptyCards from '../../components/favorites/empty-cards/empty-cards'
-import offersMock from '../../mocks/offers'
-import { OfferCardWithCity } from '../../types/offer'
-import { Cities } from '../../types/location'
+import OFFERS_MOCK from '../../mocks/offers'
 
 export default function Favorites(): JSX.Element {
 	const isEmptyFavorites = false
-
-	const cards: OfferCardWithCity[] = offersMock.map((offer) => ({
-		id: offer.id,
-		title: offer.title,
-		type: offer.type,
-		price: offer.price,
-		isFavorite: true,
-		isPremium: offer.isPremium,
-		rating: offer.rating,
-		previewImage: offer.previewImage,
-		city: offer.city.name as Cities
-	}))
 
 	return (
 		<div className={classNames('page', { 'page--favorites-empty': isEmptyFavorites })}>
 			<Header />
 			<main className={classNames('page__main page__main--favorites', { 'page__main--favorites-empty': isEmptyFavorites })}>
-				<div className="page__favorites-container container">{isEmptyFavorites ? <EmptyCards /> : <Section cards={cards} />}</div>
+				<div className="page__favorites-container container">{isEmptyFavorites ? <EmptyCards /> : <Section cards={OFFERS_MOCK} />}</div>
 			</main>
 			<Footer />
 		</div>

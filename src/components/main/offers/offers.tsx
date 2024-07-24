@@ -1,10 +1,10 @@
 import OfferCard from '../../offer-card/offer-card'
-import { OfferCard as OfferCardType } from '../../../types/offer'
+import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
 
 type OffersProps = {
-	cards: OfferCardType[]
-	setActiveOfferId: (id: string) => void
+	cards: Offer[]
+	setActiveOfferId: (id: string | null) => void
 }
 
 export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.Element {
@@ -39,7 +39,7 @@ export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.El
 				{cards
 					.filter((_, i) => i < OFFERS_NUMBER)
 					.map((card) => (
-						<OfferCard key={card.id} offer={card} setActiveOfferId={() => setActiveOfferId(card.id)} />
+						<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
 					))}
 			</div>
 		</section>
