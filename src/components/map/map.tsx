@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { City, Point } from '../../../types/location'
+import { City, Point } from '../../types/location'
 import leaflet from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
