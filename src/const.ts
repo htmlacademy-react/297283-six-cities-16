@@ -64,3 +64,10 @@ export const LOCATIONS = [
 		}
 	}
 ] as const
+
+export const SORTING_OPTIONS_MAP = {
+	popular: 'Popular',
+	priceLowToHigh: 'Price: low to high',
+	priceHighToLow: 'Price: high to low',
+	topRated: 'Top rated first'
+} as const

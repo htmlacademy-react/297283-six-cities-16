@@ -6,13 +6,15 @@ import Offers from '../../components/main/offers/offers'
 import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/map/map'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { selectCity, selectOffers, setCity, setOffers } from '../../store/slices/offers'
+import { selectCity, selectOffers, selectSorting, setCity, setOffers, setSorting } from '../../store/slices/offers'
 import { LOCATIONS } from '../../const'
 import { Point } from '../../types/location'
+import { SortingOptions } from '../../types/sorting'
 
 export default function Main(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const activeCity = useAppSelector(selectCity)
+	const sorting = useAppSelector(selectSorting)
 	const offers = useAppSelector(selectOffers)
 	const [activeOfferId, setActiveOfferId] = useState<null | string>(null)
 	const isEmptyOffers = false
@@ -39,7 +41,17 @@ export default function Main(): JSX.Element {
 				<Tabs />
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
-						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={offers} activeCity={activeCity} setActiveOfferId={setActiveOfferId} />}
+						{isEmptyOffers ? (
+							<EmptyOffers />
+						) : (
+							<Offers
+								cards={offers}
+								activeCity={activeCity}
+								setActiveOfferId={setActiveOfferId}
+								sorting={sorting}
+								setSorting={(option: SortingOptions) => dispatch(setSorting(option))}
+							/>
+						)}
 						<div className="cities__right-section">
 							{!isEmptyOffers && activeCityObj && <Map city={activeCityObj} activeOfferId={activeOfferId} points={points} />}
 						</div>

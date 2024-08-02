@@ -2,46 +2,44 @@ import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
 import { Cities } from '../../../types/location'
+import Sorting from '../sorting/sorting'
+import { SortingOptions } from '../../../types/sorting'
 
 type OffersProps = {
 	cards: Offer[]
 	activeCity: Cities | ''
 	setActiveOfferId: (id: string | null) => void
+	sorting: SortingOptions
+	setSorting: (option: SortingOptions) => void
 }
 
-export default function Offers({ cards, activeCity, setActiveOfferId }: OffersProps): JSX.Element {
+export default function Offers({ cards, activeCity, setActiveOfferId, sorting, setSorting }: OffersProps): JSX.Element {
+	const sortFunc: (a: Offer, b: Offer) => number = (a, b) => {
+		switch (sorting) {
+			case 'popular':
+				return 1
+			case 'priceHighToLow':
+				return b.price - a.price
+			case 'priceLowToHigh':
+				return a.price - b.price
+			case 'topRated':
+				return b.rating - a.rating
+			default:
+				return 1
+		}
+	}
+
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
 			<b className="places__found">
 				{cards.length} places to stay in {activeCity}
 			</b>
-			<form className="places__sorting" action="#" method="get">
-				<span className="places__sorting-caption">Sort by</span>
-				<span className="places__sorting-type" tabIndex={0}>
-					Popular
-					<svg className="places__sorting-arrow" width={7} height={4}>
-						<use xlinkHref="#icon-arrow-select" />
-					</svg>
-				</span>
-				<ul className="places__options places__options--custom places__options--opened">
-					<li className="places__option places__option--active" tabIndex={0}>
-						Popular
-					</li>
-					<li className="places__option" tabIndex={0}>
-						Price: low to high
-					</li>
-					<li className="places__option" tabIndex={0}>
-						Price: high to low
-					</li>
-					<li className="places__option" tabIndex={0}>
-						Top rated first
-					</li>
-				</ul>
-			</form>
+			<Sorting active={sorting} setSorting={setSorting} />
 			<div className="cities__places-list places__list tabs__content">
 				{cards
 					.filter((_, i) => i < OFFERS_NUMBER)
+					.sort(sortFunc)
 					.map((card) => (
 						<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
 					))}
