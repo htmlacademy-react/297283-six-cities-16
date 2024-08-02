@@ -1,4 +1,5 @@
-import { useRef, useEffect } from 'react'
+import { layerGroup } from 'leaflet'
+import { useRef, useEffect, useState } from 'react'
 import leaflet from 'leaflet'
 import { City, Point } from '../../types/location'
 import useMapLibrary from '../../hooks/useMapLibrary'
@@ -13,10 +14,17 @@ type MapProps = {
 
 export default function Map({ activeOfferId, city, points, extraClassName = 'cities' }: MapProps): JSX.Element {
 	const mapRef = useRef(null)
-	const map = useMapLibrary(mapRef, city)
+	const layerRef = useRef(layerGroup())
+	const mapLibrary = useMapLibrary(mapRef, city)
+	const [isLayerAdded, setIsLayerAdded] = useState(false)
 
 	useEffect(() => {
-		if (map) {
+		if (mapLibrary) {
+			if (!isLayerAdded) {
+				layerRef.current.addTo(mapLibrary)
+				setIsLayerAdded(true)
+			}
+			layerRef.current.clearLayers()
 			points.forEach((point) => {
 				leaflet
 					.marker(
@@ -28,10 +36,10 @@ export default function Map({ activeOfferId, city, points, extraClassName = 'cit
 							icon: point.id === activeOfferId ? ACTIVE_CUSTOM_ICON : DEFAULT_CUSTOM_ICON
 						}
 					)
-					.addTo(map)
+					.addTo(layerRef.current)
 			})
 		}
-	}, [map, points, activeOfferId])
+	}, [mapLibrary, points, activeOfferId, isLayerAdded])
 
 	return <section className={`${extraClassName}__map map`} ref={mapRef}></section>
 }

@@ -27,8 +27,10 @@ export default function useMapLibrary(mapRef: MutableRefObject<HTMLElement | nul
 
 			setMap(instance)
 			isRenderedRef.current = true
+		} else {
+			map?.setView([city.location.latitude, city.location.longitude], city.location.zoom)
 		}
-	}, [mapRef, city])
+	}, [mapRef, city, map])
 
 	return map
 }

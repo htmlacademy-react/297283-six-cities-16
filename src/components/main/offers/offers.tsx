@@ -1,17 +1,21 @@
 import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
+import { Cities } from '../../../types/location'
 
 type OffersProps = {
 	cards: Offer[]
+	activeCity: Cities | ''
 	setActiveOfferId: (id: string | null) => void
 }
 
-export default function Offers({ cards, setActiveOfferId }: OffersProps): JSX.Element {
+export default function Offers({ cards, activeCity, setActiveOfferId }: OffersProps): JSX.Element {
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
-			<b className="places__found">312 places to stay in Amsterdam</b>
+			<b className="places__found">
+				{cards.length} places to stay in {activeCity}
+			</b>
 			<form className="places__sorting" action="#" method="get">
 				<span className="places__sorting-caption">Sort by</span>
 				<span className="places__sorting-type" tabIndex={0}>
