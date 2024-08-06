@@ -14,21 +14,6 @@ type OffersProps = {
 }
 
 export default function Offers({ cards, activeCity, setActiveOfferId, sorting, setSorting }: OffersProps): JSX.Element {
-	const sortFunc: (a: Offer, b: Offer) => number = (a, b) => {
-		switch (sorting) {
-			case 'popular':
-				return 1
-			case 'priceHighToLow':
-				return b.price - a.price
-			case 'priceLowToHigh':
-				return a.price - b.price
-			case 'topRated':
-				return b.rating - a.rating
-			default:
-				return 1
-		}
-	}
-
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
@@ -37,12 +22,9 @@ export default function Offers({ cards, activeCity, setActiveOfferId, sorting, s
 			</b>
 			<Sorting active={sorting} setSorting={setSorting} />
 			<div className="cities__places-list places__list tabs__content">
-				{cards
-					.filter((_, i) => i < OFFERS_NUMBER)
-					.sort(sortFunc)
-					.map((card) => (
-						<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
-					))}
+				{cards.slice(0, OFFERS_NUMBER).map((card) => (
+					<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
+				))}
 			</div>
 		</section>
 	)

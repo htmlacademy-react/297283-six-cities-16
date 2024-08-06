@@ -6,7 +6,7 @@ import Offers from '../../components/main/offers/offers'
 import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/map/map'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { selectCity, selectOffersByCity, selectSorting, setSorting } from '../../store/slices/offers'
+import { selectCity, selectOffersByCityAndSorting, selectSorting, setSorting } from '../../store/slices/offers'
 import { LOCATIONS } from '../../const'
 import { Point } from '../../types/location'
 import { SortingOptions } from '../../types/sorting'
@@ -15,7 +15,7 @@ export default function Main(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const activeCity = useAppSelector(selectCity)
 	const sorting = useAppSelector(selectSorting)
-	const offers = useAppSelector(selectOffersByCity)
+	const offers = useAppSelector(selectOffersByCityAndSorting)
 	const [activeOfferId, setActiveOfferId] = useState<null | string>(null)
 	const isEmptyOffers = false
 
