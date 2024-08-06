@@ -2,13 +2,13 @@ import { MouseEvent } from 'react'
 import classNames from 'classnames'
 import { LOCATIONS } from '../../const'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { selectCity } from '../../store/slices/offers'
+import { offersSlice } from '../../store/slices/offers'
 import { setCity } from '../../store/slices/offers'
 import { CityName } from '../../types/location'
 
 export default function Tabs(): JSX.Element {
 	const dispatch = useAppDispatch()
-	const activeCity = useAppSelector(selectCity)
+	const activeCity = useAppSelector(offersSlice.selectors.city)
 
 	const handleClick = (e: MouseEvent, cityName: CityName) => {
 		e.preventDefault()
