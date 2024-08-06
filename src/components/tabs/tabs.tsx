@@ -1,38 +1,36 @@
+import { MouseEvent } from 'react'
+import classNames from 'classnames'
+import { LOCATIONS } from '../../const'
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
+import { selectCity } from '../../store/slices/offers'
+import { setCity, setOffers } from '../../store/slices/offers'
+import { Cities } from '../../types/location'
+
 export default function Tabs(): JSX.Element {
+	const dispatch = useAppDispatch()
+	const activeCity = useAppSelector(selectCity)
+
+	const handleClick = (e: MouseEvent, newLocation: Cities) => {
+		e.preventDefault()
+		dispatch(setCity(newLocation))
+		dispatch(setOffers())
+	}
+
 	return (
 		<div className="tabs">
 			<section className="locations container">
 				<ul className="locations__list tabs__list">
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item" href="#">
-							<span>Paris</span>
-						</a>
-					</li>
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item" href="#">
-							<span>Cologne</span>
-						</a>
-					</li>
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item" href="#">
-							<span>Brussels</span>
-						</a>
-					</li>
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item tabs__item--active">
-							<span>Amsterdam</span>
-						</a>
-					</li>
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item" href="#">
-							<span>Hamburg</span>
-						</a>
-					</li>
-					<li className="locations__item">
-						<a className="locations__item-link tabs__item" href="#">
-							<span>Dusseldorf</span>
-						</a>
-					</li>
+					{LOCATIONS.map((location) => (
+						<li className="locations__item" key={location.name}>
+							<a
+								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCity })}
+								href="#"
+								onClick={(e) => handleClick(e, location.name)}
+							>
+								<span>{location.name}</span>
+							</a>
+						</li>
+					))}
 				</ul>
 			</section>
 		</div>

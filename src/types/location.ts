@@ -1,6 +1,6 @@
-import { CITIES } from '../const'
+import { LOCATIONS } from '../const'
 
-export type Cities = (typeof CITIES)[number]
+export type Cities = (typeof LOCATIONS)[number]['name']
 
 export interface City {
 	name: Cities

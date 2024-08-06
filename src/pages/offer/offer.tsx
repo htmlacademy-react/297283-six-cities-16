@@ -1,6 +1,6 @@
 import Header from '../../components/header/header'
 import Gallery from '../../components/offer/gallery/gallery'
-import Map from '../../components/main/map/map'
+import Map from '../../components/map/map'
 import Info from '../../components/offer/info/info'
 import Host from '../../components/offer/host/host'
 import NearOffers from '../../components/near-offers/near-offers'
