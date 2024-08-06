@@ -2,7 +2,7 @@ import { layerGroup } from 'leaflet'
 import { useRef, useEffect, useState } from 'react'
 import leaflet from 'leaflet'
 import { City, Point } from '../../types/location'
-import useMapLibrary from '../../hooks/useMapLibrary'
+import useMapLibrary from '../../hooks/use-map-library'
 import { ACTIVE_CUSTOM_ICON, DEFAULT_CUSTOM_ICON } from '../../const'
 
 type MapProps = {
