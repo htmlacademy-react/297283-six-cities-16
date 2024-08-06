@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import OFFERS from '../../mocks/offers'
-import { Cities } from '../../types/location'
+import { CityName } from '../../types/location'
 import { Offer } from '../../types/offer'
 import { SortingOptions } from '../../types/sorting'
 
 interface InitialState {
-	city: Cities | ''
+	city: CityName | ''
 	offers: Offer[]
 	sorting: SortingOptions
 }
@@ -21,7 +21,7 @@ export const offersSlice = createSlice({
 	name: 'offers',
 	initialState,
 	reducers: {
-		setCity: (state, action: PayloadAction<Cities>) => {
+		setCity: (state, action: PayloadAction<CityName>) => {
 			state.city = action.payload
 		},
 		setOffers: (state) => {

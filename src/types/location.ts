@@ -1,9 +1,9 @@
 import { LOCATIONS } from '../const'
 
-export type Cities = (typeof LOCATIONS)[number]['name']
+export type CityName = (typeof LOCATIONS)[number]['name']
 
 export interface City {
-	name: Cities
+	name: CityName
 	location: Location
 }
 

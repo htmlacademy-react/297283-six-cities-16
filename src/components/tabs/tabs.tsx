@@ -4,13 +4,13 @@ import { LOCATIONS } from '../../const'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
 import { selectCity } from '../../store/slices/offers'
 import { setCity, setOffers } from '../../store/slices/offers'
-import { Cities } from '../../types/location'
+import { CityName } from '../../types/location'
 
 export default function Tabs(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const activeCity = useAppSelector(selectCity)
 
-	const handleClick = (e: MouseEvent, newLocation: Cities) => {
+	const handleClick = (e: MouseEvent, newLocation: CityName) => {
 		e.preventDefault()
 		dispatch(setCity(newLocation))
 		dispatch(setOffers())

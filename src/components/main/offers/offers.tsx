@@ -1,13 +1,13 @@
 import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
-import { Cities } from '../../../types/location'
+import { CityName } from '../../../types/location'
 import Sorting from '../sorting/sorting'
 import { SortingOptions } from '../../../types/sorting'
 
 type OffersProps = {
 	cards: Offer[]
-	activeCity: Cities | ''
+	activeCity: CityName | ''
 	setActiveOfferId: (id: string | null) => void
 	sorting: SortingOptions
 	setSorting: (option: SortingOptions) => void
