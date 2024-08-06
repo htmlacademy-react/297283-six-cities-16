@@ -7,7 +7,7 @@ import { SortingOptions } from '../../../types/sorting'
 
 type OffersProps = {
 	cards: Offer[]
-	activeCity: CityName | ''
+	activeCity: CityName
 	setActiveOfferId: (id: string | null) => void
 	sorting: SortingOptions
 	setSorting: (option: SortingOptions) => void
