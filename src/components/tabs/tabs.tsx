@@ -8,7 +8,7 @@ import { CityName } from '../../types/location'
 
 export default function Tabs(): JSX.Element {
 	const dispatch = useAppDispatch()
-	const activeCity = useAppSelector(offersSlice.selectors.city)
+	const activeCityName = useAppSelector(offersSlice.selectors.city)
 
 	const handleClick = (e: MouseEvent, cityName: CityName) => {
 		e.preventDefault()
@@ -22,7 +22,7 @@ export default function Tabs(): JSX.Element {
 					{LOCATIONS.map((location) => (
 						<li className="locations__item" key={location.name}>
 							<a
-								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCity })}
+								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCityName })}
 								href="#"
 								onClick={(e) => handleClick(e, location.name)}
 							>

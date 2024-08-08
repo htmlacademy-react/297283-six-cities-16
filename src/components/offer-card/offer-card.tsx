@@ -6,7 +6,7 @@ type OfferCardProps = {
 	offer: OfferCardType
 	extraClassName?: string
 	imageSize?: [number, number]
-	setActiveOfferId?: (id: string | null) => void
+	setActiveOfferId?: (id: string) => void
 }
 
 export default function OfferCard({
@@ -18,7 +18,7 @@ export default function OfferCard({
 	const { id, title, type, price, isFavorite, isPremium, rating, previewImage } = offer
 
 	const handleMouseEnter = () => setActiveOfferId?.(id)
-	const handleMouseLeave = () => setActiveOfferId?.(null)
+	const handleMouseLeave = () => setActiveOfferId?.('')
 
 	return (
 		<article className={`${extraClassName}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

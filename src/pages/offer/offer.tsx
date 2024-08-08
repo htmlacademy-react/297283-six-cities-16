@@ -8,7 +8,6 @@ import Reviews from '../../components/offer/review/section/section'
 import REVIEWS from '../../mocks/reviews'
 import OFFERS from '../../mocks/offers'
 import OFFER from '../../mocks/offer'
-import CITY from '../../mocks/city'
 import POINTS from '../../mocks/points'
 
 export default function Favorites(): JSX.Element {
@@ -25,7 +24,7 @@ export default function Favorites(): JSX.Element {
 							<Reviews isLoggedIn reviews={REVIEWS} />
 						</div>
 					</div>
-					<Map activeOfferId={OFFER.id} city={CITY} points={POINTS.slice(0, 4)} extraClassName="offer" />
+					<Map points={POINTS.slice(0, 4)} extraClassName="offer" />
 				</section>
 				<div className="container">
 					<NearOffers offers={OFFERS.slice(0, 3)} />

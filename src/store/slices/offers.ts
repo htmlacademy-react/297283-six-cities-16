@@ -8,12 +8,14 @@ interface InitialState {
 	city: CityName
 	offers: Offer[]
 	sorting: SortingOptions
+	activeOfferId: string
 }
 
 const initialState: InitialState = {
 	city: 'Paris',
 	offers: OFFERS,
-	sorting: 'popular'
+	sorting: 'popular',
+	activeOfferId: ''
 }
 
 export const offersSlice = createSlice({
@@ -25,12 +27,16 @@ export const offersSlice = createSlice({
 		},
 		setSorting: (state, action: PayloadAction<SortingOptions>) => {
 			state.sorting = action.payload
+		},
+		setActiveOfferId: (state, action: PayloadAction<string>) => {
+			state.activeOfferId = action.payload
 		}
 	},
 	selectors: {
 		city: (state) => state.city,
 		offers: (state) => state.offers,
-		sorting: (state) => state.sorting
+		sorting: (state) => state.sorting,
+		activeOfferId: (state) => state.activeOfferId
 	}
 })
 
@@ -39,7 +45,7 @@ export const selectOffersByCityAndSorting = createSelector(
 	(city, offers, sorting) =>
 		offers
 			.filter((offer) => offer.city.name === city)
-			.sort((a: Offer, b: Offer): number => {
+			.sort((a, b): number => {
 				switch (sorting) {
 					case 'popular':
 						return 1
@@ -55,4 +61,4 @@ export const selectOffersByCityAndSorting = createSelector(
 			})
 )
 
-export const { setCity, setSorting } = offersSlice.actions
+export const { setCity, setSorting, setActiveOfferId } = offersSlice.actions

@@ -1,29 +1,29 @@
 import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
-import { CityName } from '../../../types/location'
 import Sorting from '../sorting/sorting'
-import { SortingOptions } from '../../../types/sorting'
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
+import { offersSlice, setActiveOfferId, setSorting } from '../../../store/slices/offers'
 
 type OffersProps = {
 	cards: Offer[]
-	activeCity: CityName
-	setActiveOfferId: (id: string | null) => void
-	sorting: SortingOptions
-	setSorting: (option: SortingOptions) => void
 }
 
-export default function Offers({ cards, activeCity, setActiveOfferId, sorting, setSorting }: OffersProps): JSX.Element {
+export default function Offers({ cards }: OffersProps): JSX.Element {
+	const dispatch = useAppDispatch()
+	const sorting = useAppSelector(offersSlice.selectors.sorting)
+	const activeCityName = useAppSelector(offersSlice.selectors.city)
+
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
 			<b className="places__found">
-				{cards.length} places to stay in {activeCity}
+				{cards.length} places to stay in {activeCityName}
 			</b>
-			<Sorting active={sorting} setSorting={setSorting} />
+			<Sorting active={sorting} setSorting={(option) => dispatch(setSorting(option))} />
 			<div className="cities__places-list places__list tabs__content">
 				{cards.slice(0, OFFERS_NUMBER).map((card) => (
-					<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
+					<OfferCard key={card.id} offer={card} setActiveOfferId={(id) => dispatch(setActiveOfferId(id))} />
 				))}
 			</div>
 		</section>
