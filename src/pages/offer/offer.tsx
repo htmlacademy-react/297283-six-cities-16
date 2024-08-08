@@ -9,8 +9,21 @@ import REVIEWS from '../../mocks/reviews'
 import OFFERS from '../../mocks/offers'
 import OFFER from '../../mocks/offer'
 import POINTS from '../../mocks/points'
+import { useEffect } from 'react'
+import { setActiveOfferId, setCity } from '../../store/slices/offers'
+import { useAppDispatch } from '../../hooks/hooks'
 
 export default function Favorites(): JSX.Element {
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		dispatch(setCity('Amsterdam'))
+		dispatch(setActiveOfferId(POINTS[0].id))
+		return () => {
+			dispatch(setActiveOfferId(''))
+		}
+	}, [dispatch])
+
 	return (
 		<div className="page">
 			<Header />
