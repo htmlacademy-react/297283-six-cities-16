@@ -2,21 +2,24 @@ import { layerGroup } from 'leaflet'
 import { useRef, useEffect, useState } from 'react'
 import leaflet from 'leaflet'
 import { City, Point } from '../../types/location'
-import useMapLibrary from '../../hooks/useMapLibrary'
-import { ACTIVE_CUSTOM_ICON, DEFAULT_CUSTOM_ICON } from '../../const'
+import useMapLibrary from '../../hooks/use-map-library'
+import { ACTIVE_CUSTOM_ICON, DEFAULT_CUSTOM_ICON, LOCATIONS } from '../../const'
+import { useAppSelector } from '../../hooks/hooks'
+import { offersSlice } from '../../store/slices/offers'
 
 type MapProps = {
-	activeOfferId?: null | string
-	city: City
 	points: Point[]
 	extraClassName?: string
 }
 
-export default function Map({ activeOfferId, city, points, extraClassName = 'cities' }: MapProps): JSX.Element {
+export default function Map({ points, extraClassName = 'cities' }: MapProps): JSX.Element {
 	const mapRef = useRef(null)
 	const layerRef = useRef(layerGroup())
-	const mapLibrary = useMapLibrary(mapRef, city)
+	const activeCityName = useAppSelector(offersSlice.selectors.city)
+	const activeCityObj = LOCATIONS.find((location) => location.name === activeCityName)
+	const mapLibrary = useMapLibrary(mapRef, activeCityObj as City)
 	const [isLayerAdded, setIsLayerAdded] = useState(false)
+	const activeOfferId = useAppSelector(offersSlice.selectors.activeOfferId)
 
 	useEffect(() => {
 		if (mapLibrary) {

@@ -1,4 +1,4 @@
-import { Cities, Location } from './location'
+import { CityName, Location } from './location'
 import { User } from './user'
 
 export interface Offer {
@@ -7,7 +7,7 @@ export interface Offer {
 	type: string
 	price: number
 	city: {
-		name: Cities
+		name: CityName
 		location: Location
 	}
 	location: Location

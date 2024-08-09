@@ -6,7 +6,7 @@ type OfferCardProps = {
 	offer: OfferCardType
 	extraClassName?: string
 	imageSize?: [number, number]
-	setActiveOfferId?: (id: string | null) => void
+	setActiveOfferId?: (id: string) => void
 }
 
 export default function OfferCard({
@@ -17,19 +17,8 @@ export default function OfferCard({
 }: OfferCardProps): JSX.Element {
 	const { id, title, type, price, isFavorite, isPremium, rating, previewImage } = offer
 
-	const handleMouseEnter = () => {
-		if (!setActiveOfferId) {
-			return
-		}
-		setActiveOfferId(id)
-	}
-
-	const handleMouseLeave = () => {
-		if (!setActiveOfferId) {
-			return
-		}
-		setActiveOfferId(null)
-	}
+	const handleMouseEnter = () => setActiveOfferId?.(id)
+	const handleMouseLeave = () => setActiveOfferId?.('')
 
 	return (
 		<article className={`${extraClassName}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

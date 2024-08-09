@@ -1,48 +1,30 @@
 import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
 import { OFFERS_NUMBER } from '../../../const'
-import { Cities } from '../../../types/location'
 import Sorting from '../sorting/sorting'
-import { SortingOptions } from '../../../types/sorting'
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
+import { offersSlice, setActiveOfferId, setSorting } from '../../../store/slices/offers'
 
 type OffersProps = {
 	cards: Offer[]
-	activeCity: Cities | ''
-	setActiveOfferId: (id: string | null) => void
-	sorting: SortingOptions
-	setSorting: (option: SortingOptions) => void
 }
 
-export default function Offers({ cards, activeCity, setActiveOfferId, sorting, setSorting }: OffersProps): JSX.Element {
-	const sortFunc: (a: Offer, b: Offer) => number = (a, b) => {
-		switch (sorting) {
-			case 'popular':
-				return 1
-			case 'priceHighToLow':
-				return b.price - a.price
-			case 'priceLowToHigh':
-				return a.price - b.price
-			case 'topRated':
-				return b.rating - a.rating
-			default:
-				return 1
-		}
-	}
+export default function Offers({ cards }: OffersProps): JSX.Element {
+	const dispatch = useAppDispatch()
+	const sorting = useAppSelector(offersSlice.selectors.sorting)
+	const activeCityName = useAppSelector(offersSlice.selectors.city)
 
 	return (
 		<section className="cities__places places">
 			<h2 className="visually-hidden">Offers</h2>
 			<b className="places__found">
-				{cards.length} places to stay in {activeCity}
+				{cards.length} places to stay in {activeCityName}
 			</b>
-			<Sorting active={sorting} setSorting={setSorting} />
+			<Sorting active={sorting} setSorting={(option) => dispatch(setSorting(option))} />
 			<div className="cities__places-list places__list tabs__content">
-				{cards
-					.filter((_, i) => i < OFFERS_NUMBER)
-					.sort(sortFunc)
-					.map((card) => (
-						<OfferCard key={card.id} offer={card} setActiveOfferId={setActiveOfferId} />
-					))}
+				{cards.slice(0, OFFERS_NUMBER).map((card) => (
+					<OfferCard key={card.id} offer={card} setActiveOfferId={(id) => dispatch(setActiveOfferId(id))} />
+				))}
 			</div>
 		</section>
 	)

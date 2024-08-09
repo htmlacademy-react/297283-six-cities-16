@@ -2,18 +2,17 @@ import { MouseEvent } from 'react'
 import classNames from 'classnames'
 import { LOCATIONS } from '../../const'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { selectCity } from '../../store/slices/offers'
-import { setCity, setOffers } from '../../store/slices/offers'
-import { Cities } from '../../types/location'
+import { offersSlice } from '../../store/slices/offers'
+import { setCity } from '../../store/slices/offers'
+import { CityName } from '../../types/location'
 
 export default function Tabs(): JSX.Element {
 	const dispatch = useAppDispatch()
-	const activeCity = useAppSelector(selectCity)
+	const activeCityName = useAppSelector(offersSlice.selectors.city)
 
-	const handleClick = (e: MouseEvent, newLocation: Cities) => {
+	const handleClick = (e: MouseEvent, cityName: CityName) => {
 		e.preventDefault()
-		dispatch(setCity(newLocation))
-		dispatch(setOffers())
+		dispatch(setCity(cityName))
 	}
 
 	return (
@@ -23,7 +22,7 @@ export default function Tabs(): JSX.Element {
 					{LOCATIONS.map((location) => (
 						<li className="locations__item" key={location.name}>
 							<a
-								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCity })}
+								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCityName })}
 								href="#"
 								onClick={(e) => handleClick(e, location.name)}
 							>
