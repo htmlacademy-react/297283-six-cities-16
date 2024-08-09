@@ -1,27 +1,33 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import OFFERS from '../../mocks/offers'
 import { CityName } from '../../types/location'
 import { Offer } from '../../types/offer'
 import { SortingOptions } from '../../types/sorting'
+import { fetchOffers } from '../thunks/offers'
+import { RequestStatus } from '../../const'
 
 interface InitialState {
 	city: CityName
 	offers: Offer[]
 	sorting: SortingOptions
 	activeOfferId: string
+	status: RequestStatus
 }
 
 const initialState: InitialState = {
 	city: 'Paris',
-	offers: OFFERS,
+	offers: [],
 	sorting: 'popular',
-	activeOfferId: ''
+	activeOfferId: '',
+	status: RequestStatus.Initial
 }
 
 export const offersSlice = createSlice({
 	name: 'offers',
 	initialState,
 	reducers: {
+		setOffers: (state, action: PayloadAction<Offer[]>) => {
+			state.offers = action.payload
+		},
 		setCity: (state, action: PayloadAction<CityName>) => {
 			state.city = action.payload
 		},
@@ -36,7 +42,21 @@ export const offersSlice = createSlice({
 		city: (state) => state.city,
 		offers: (state) => state.offers,
 		sorting: (state) => state.sorting,
-		activeOfferId: (state) => state.activeOfferId
+		activeOfferId: (state) => state.activeOfferId,
+		status: (state) => state.status
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchOffers.pending, (state) => {
+				state.status = RequestStatus.Loading
+			})
+			.addCase(fetchOffers.fulfilled, (state, action) => {
+				state.status = RequestStatus.Success
+				state.offers = action.payload
+			})
+			.addCase(fetchOffers.rejected, (state) => {
+				state.status = RequestStatus.Failed
+			})
 	}
 })
 
@@ -61,4 +81,4 @@ export const selectOffersByCityAndSorting = createSelector(
 			})
 )
 
-export const { setCity, setSorting, setActiveOfferId } = offersSlice.actions
+export const { setOffers, setCity, setSorting, setActiveOfferId } = offersSlice.actions
