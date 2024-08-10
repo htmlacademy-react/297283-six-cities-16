@@ -71,3 +71,18 @@ export const SORTING_OPTIONS_MAP = {
 	priceHighToLow: 'Price: high to low',
 	topRated: 'Top rated first'
 } as const
+
+export const ENDPOINTS = {
+	offers: '/offers',
+	favorite: '/favorite',
+	login: '/login',
+	logout: '/logout',
+	comments: '/comments'
+} as const
+
+export enum RequestStatus {
+	Initial = 'Initial',
+	Loading = 'Loading',
+	Success = 'Success',
+	Failed = 'Failed'
+}
