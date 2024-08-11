@@ -1,4 +1,4 @@
-export const TOKEN_NAME = 'X-Token'
+export const TOKEN_NAME = 'six-cities-token'
 
 export const getToken = (): string => {
 	const token = localStorage.getItem(TOKEN_NAME)
