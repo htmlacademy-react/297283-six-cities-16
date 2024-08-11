@@ -72,12 +72,12 @@ export const SORTING_OPTIONS_MAP = {
 	topRated: 'Top rated first'
 } as const
 
-export const ENDPOINTS = {
-	offers: '/offers',
-	favorite: '/favorite',
-	login: '/login',
-	logout: '/logout',
-	comments: '/comments'
+export const Endpoint = {
+	Offers: '/offers',
+	Favorite: '/favorite',
+	Login: '/login',
+	Logout: '/logout',
+	Comments: '/comments'
 } as const
 
 export enum RequestStatus {
