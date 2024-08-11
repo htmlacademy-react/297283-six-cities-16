@@ -1,7 +1,7 @@
-import { User } from '../../../types/user'
+import { UserShort } from '../../../types/user'
 
 type HostProps = {
-	host: User
+	host: UserShort
 	description: string
 }
 

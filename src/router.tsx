@@ -4,7 +4,7 @@ import Favorites from './pages/favorites/favorites'
 import Login from './pages/login/login'
 import Offer from './pages/offer/offer'
 import NotFound from './pages/not-found/not-found'
-import PrivateRoute from './components/private-route/private-route'
+import ProtectedRoute from './components/protected-route/protected-route'
 
 const router = createBrowserRouter([
 	{
@@ -15,14 +15,18 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'login',
-				element: <Login />
+				element: (
+					<ProtectedRoute>
+						<Login />
+					</ProtectedRoute>
+				)
 			},
 			{
 				path: 'favorites',
 				element: (
-					<PrivateRoute hasAccess>
+					<ProtectedRoute auth>
 						<Favorites />
-					</PrivateRoute>
+					</ProtectedRoute>
 				)
 			},
 			{

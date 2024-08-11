@@ -86,3 +86,9 @@ export enum RequestStatus {
 	Success = 'Success',
 	Failed = 'Failed'
 }
+
+export enum AuthStatus {
+	Auth = 'Auth',
+	NoAuth = 'NoAuth',
+	Unknown = 'Unknown'
+}

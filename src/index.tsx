@@ -4,8 +4,11 @@ import { RouterProvider } from 'react-router-dom'
 import router from './router'
 import store from './store/store'
 import { Provider } from 'react-redux'
+import { checkAuth } from './store/thunks/auth'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
+store.dispatch(checkAuth())
 
 root.render(
 	<React.StrictMode>

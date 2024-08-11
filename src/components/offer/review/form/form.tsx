@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FormEvent, useState } from 'react'
 
 type ReviewForm = {
 	rating: number
@@ -15,7 +15,7 @@ export default function ReviewForm(): JSX.Element {
 
 	const isDisabledForm = !reviewForm.rating || reviewForm.comment.length < 50
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 	}
 
