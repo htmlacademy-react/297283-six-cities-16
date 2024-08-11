@@ -5,7 +5,7 @@ import { SortingOptions } from '../../types/sorting'
 import { fetchOffers } from '../thunks/offers'
 import { RequestStatus } from '../../const'
 
-interface InitialState {
+interface OffersState {
 	city: CityName
 	offers: Offer[]
 	sorting: SortingOptions
@@ -13,7 +13,7 @@ interface InitialState {
 	status: RequestStatus
 }
 
-const initialState: InitialState = {
+const initialState: OffersState = {
 	city: 'Paris',
 	offers: [],
 	sorting: 'popular',

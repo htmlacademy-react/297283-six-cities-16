@@ -3,44 +3,44 @@ import { AuthStatus, RequestStatus } from '../../const'
 import { checkAuth, login, logout } from '../thunks/auth'
 import { User } from '../../types/user'
 
-interface InitialState {
+interface AuthState {
 	authStatus: AuthStatus
 	user: User | null
 	status: RequestStatus
 }
 
-const initialState: InitialState = {
+const initialState: AuthState = {
 	authStatus: AuthStatus.Unknown,
 	user: null,
 	status: RequestStatus.Initial
 }
 
-const loginPending = (state: InitialState) => {
+const loginPending = (state: AuthState) => {
 	state.status = RequestStatus.Loading
 }
 
-const loginFulfilled = (state: InitialState, action: PayloadAction<User>) => {
+const loginFulfilled = (state: AuthState, action: PayloadAction<User>) => {
 	state.status = RequestStatus.Success
 	state.user = action.payload
 	state.authStatus = AuthStatus.Auth
 }
 
-const loginRejected = (state: InitialState) => {
+const loginRejected = (state: AuthState) => {
 	state.status = RequestStatus.Failed
 	state.authStatus = AuthStatus.NoAuth
 }
 
-const logoutPending = (state: InitialState) => {
+const logoutPending = (state: AuthState) => {
 	state.status = RequestStatus.Loading
 }
 
-const logoutFulfilled = (state: InitialState) => {
+const logoutFulfilled = (state: AuthState) => {
 	state.status = RequestStatus.Success
 	state.user = null
 	state.authStatus = AuthStatus.NoAuth
 }
 
-const logoutRejected = (state: InitialState) => {
+const logoutRejected = (state: AuthState) => {
 	state.status = RequestStatus.Failed
 	state.authStatus = AuthStatus.NoAuth
 }
