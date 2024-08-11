@@ -26,8 +26,10 @@ export default function Main(): JSX.Element {
 	}))
 
 	useEffect(() => {
-		dispatch(fetchOffers())
-	}, [dispatch])
+		if (status === RequestStatus.Initial) {
+			dispatch(fetchOffers())
+		}
+	}, [dispatch, status])
 
 	return (
 		<div className="page page--gray page--main">
