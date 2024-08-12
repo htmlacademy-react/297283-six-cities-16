@@ -7,3 +7,13 @@ export interface Review {
 	comment: string
 	rating: number
 }
+
+export interface ReviewForm {
+	rating: number
+	comment: string
+}
+
+export interface ReviewFormPayload {
+	body: ReviewForm
+	offerId: string
+}

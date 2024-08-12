@@ -25,9 +25,6 @@ export const offersSlice = createSlice({
 	name: 'offers',
 	initialState,
 	reducers: {
-		setOffers: (state, action: PayloadAction<Offer[]>) => {
-			state.offers = action.payload
-		},
 		setCity: (state, action: PayloadAction<CityName>) => {
 			state.city = action.payload
 		},
@@ -81,4 +78,4 @@ export const selectOffersByCityAndSorting = createSelector(
 			})
 )
 
-export const { setOffers, setCity, setSorting, setActiveOfferId } = offersSlice.actions
+export const { setCity, setSorting, setActiveOfferId } = offersSlice.actions
