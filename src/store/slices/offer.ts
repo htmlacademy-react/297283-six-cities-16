@@ -49,8 +49,13 @@ export const offerSlice = createSlice({
 				state.status = RequestStatus.Failed
 			})
 		builder.addCase(toggleFavorite.fulfilled, (state, action) => {
-			if (state.offer?.isFavorite !== undefined) {
+			if (state.offer?.isFavorite !== undefined && state.offer.id === action.payload.id) {
 				state.offer.isFavorite = action.payload.isFavorite
+			} else {
+				const nearOffer = state.nearOffers.find((item) => item.id === action.payload.id)
+				if (nearOffer) {
+					nearOffer.isFavorite = action.payload.isFavorite
+				}
 			}
 		})
 	}
