@@ -5,6 +5,7 @@ import { authSlice } from '../../store/slices/auth'
 import { AuthStatus } from '../../const'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { logout } from '../../store/thunks/auth'
+import { favoriteSlice } from '../../store/slices/favorite'
 
 type HeaderProps = {
 	showNav?: boolean
@@ -14,6 +15,7 @@ export default function Header({ showNav = true }: HeaderProps): JSX.Element {
 	const dispatch = useAppDispatch()
 	const authStatus = useAppSelector(authSlice.selectors.authStatus)
 	const user = useAppSelector(authSlice.selectors.user)
+	const favorite = useAppSelector(favoriteSlice.selectors.favorite)
 	const location = useLocation()
 	const isMainPage = location.pathname === '/'
 
@@ -44,7 +46,7 @@ export default function Header({ showNav = true }: HeaderProps): JSX.Element {
 											<Link to="/favorites" className="header__nav-link header__nav-link--profile">
 												<div className="header__avatar-wrapper user__avatar-wrapper"></div>
 												<span className="header__user-name user__name">{user?.email}</span>
-												<span className="header__favorite-count">3</span>
+												<span className="header__favorite-count">{favorite.length}</span>
 											</Link>
 										</li>
 										<li className="header__nav-item">

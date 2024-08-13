@@ -8,7 +8,7 @@ import Reviews from '../../components/offer/review/section/section'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { fetchNearOffers, fetchOffer } from '../../store/thunks/offer'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { offerSlice } from '../../store/slices/offer'
 import Loader from '../../components/loader/loader'
 import { setActiveOfferId, setCity } from '../../store/slices/offers'
@@ -16,18 +16,27 @@ import { fetchReviews } from '../../store/thunks/reviews'
 import { reviewsSlice } from '../../store/slices/reviews'
 import { Point } from '../../types/location'
 import { authSlice } from '../../store/slices/auth'
+import { RequestStatus } from '../../const'
 
 export default function Offer(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const { id } = useParams()
 	const authStatus = useAppSelector(authSlice.selectors.authStatus)
+	const status = useAppSelector(offerSlice.selectors.status)
 	const offer = useAppSelector(offerSlice.selectors.offer)
 	const nearOffers = useAppSelector(offerSlice.selectors.nearOffers)
 	const rewiews = useAppSelector(reviewsSlice.selectors.reviews)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		Promise.all([dispatch(fetchOffer(id!)), dispatch(fetchNearOffers(id!)), dispatch(fetchReviews(id!))])
 	}, [dispatch, id])
+
+	useEffect(() => {
+		if (status === RequestStatus.Failed) {
+			navigate('/404')
+		}
+	}, [navigate, status])
 
 	useEffect(() => {
 		if (offer) {

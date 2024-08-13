@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { Offer, OfferFull } from '../../types/offer'
 import { RequestStatus } from '../../const'
 import { fetchNearOffers, fetchOffer } from '../thunks/offer'
+import { toggleFavorite } from '../thunks/favorite'
 
 interface OfferState {
 	offer: OfferFull | null
@@ -47,5 +48,10 @@ export const offerSlice = createSlice({
 			.addCase(fetchNearOffers.rejected, (state) => {
 				state.status = RequestStatus.Failed
 			})
+		builder.addCase(toggleFavorite.fulfilled, (state, action) => {
+			if (state.offer?.isFavorite !== undefined) {
+				state.offer.isFavorite = action.payload.isFavorite
+			}
+		})
 	}
 })

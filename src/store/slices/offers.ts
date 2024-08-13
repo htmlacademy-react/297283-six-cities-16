@@ -4,6 +4,7 @@ import { Offer } from '../../types/offer'
 import { SortingOptions } from '../../types/sorting'
 import { fetchOffers } from '../thunks/offers'
 import { RequestStatus } from '../../const'
+import { toggleFavorite } from '../thunks/favorite'
 
 interface OffersState {
 	city: CityName
@@ -54,6 +55,12 @@ export const offersSlice = createSlice({
 			.addCase(fetchOffers.rejected, (state) => {
 				state.status = RequestStatus.Failed
 			})
+		builder.addCase(toggleFavorite.fulfilled, (state, action) => {
+			const offer = state.offers.find((item) => item.id === action.payload.id)
+			if (offer) {
+				offer.isFavorite = action.payload.isFavorite
+			}
+		})
 	}
 })
 

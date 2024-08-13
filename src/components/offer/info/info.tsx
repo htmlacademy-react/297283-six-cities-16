@@ -1,12 +1,27 @@
-import classNames from 'classnames'
 import { OfferFull } from '../../../types/offer'
+import Toggler from '../../favorites/toggler/toggler'
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
+import { toggleFavorite } from '../../../store/thunks/favorite'
+import { authSlice } from '../../../store/slices/auth'
+import { AuthStatus } from '../../../const'
+import { useNavigate } from 'react-router-dom'
 
 type InfoProps = {
-	offer: Pick<OfferFull, 'title' | 'isPremium' | 'isFavorite' | 'rating' | 'type' | 'bedrooms' | 'maxAdults' | 'price' | 'goods'>
+	offer: Pick<OfferFull, 'id' | 'title' | 'isPremium' | 'isFavorite' | 'rating' | 'type' | 'bedrooms' | 'maxAdults' | 'price' | 'goods'>
 }
 
 export default function Info({ offer }: InfoProps): JSX.Element {
-	const { title, isPremium, isFavorite, rating, type, bedrooms, maxAdults, price, goods } = offer
+	const { id, title, isPremium, isFavorite, rating, type, bedrooms, maxAdults, price, goods } = offer
+	const dispatch = useAppDispatch()
+	const authStatus = useAppSelector(authSlice.selectors.authStatus)
+	const navigate = useNavigate()
+
+	const handleToggleFavorite = () => {
+		if (authStatus !== AuthStatus.Auth) {
+			return navigate('/login')
+		}
+		dispatch(toggleFavorite({ offerId: id, status: isFavorite ? 0 : 1 }))
+	}
 
 	return (
 		<>
@@ -17,12 +32,7 @@ export default function Info({ offer }: InfoProps): JSX.Element {
 			)}
 			<div className="offer__name-wrapper">
 				<h1 className="offer__name">{title}</h1>
-				<button className={classNames('offer__bookmark-button button', { 'offer__bookmark-button--active': isFavorite })} type="button">
-					<svg className="offer__bookmark-icon" width={31} height={33}>
-						<use xlinkHref="#icon-bookmark" />
-					</svg>
-					<span className="visually-hidden">To bookmarks</span>
-				</button>
+				<Toggler active={isFavorite} extraClassName="offer" size={[31, 33]} toggle={handleToggleFavorite} />
 			</div>
 			<div className="offer__rating rating">
 				<div className="offer__stars rating__stars">
