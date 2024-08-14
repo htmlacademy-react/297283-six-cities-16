@@ -32,8 +32,8 @@ export default function Map({ points, extraClassName = 'cities' }: MapProps): JS
 				leaflet
 					.marker(
 						{
-							lat: point.latitude,
-							lng: point.longitude
+							lat: point.location.latitude,
+							lng: point.location.longitude
 						},
 						{
 							icon: point.id === activeOfferId ? ACTIVE_CUSTOM_ICON : DEFAULT_CUSTOM_ICON
