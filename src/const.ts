@@ -72,12 +72,12 @@ export const SORTING_OPTIONS_MAP = {
 	topRated: 'Top rated first'
 } as const
 
-export const ENDPOINTS = {
-	offers: '/offers',
-	favorite: '/favorite',
-	login: '/login',
-	logout: '/logout',
-	comments: '/comments'
+export const Endpoint = {
+	Offers: '/offers',
+	Favorite: '/favorite',
+	Login: '/login',
+	Logout: '/logout',
+	Reviews: '/comments'
 } as const
 
 export enum RequestStatus {
@@ -85,4 +85,10 @@ export enum RequestStatus {
 	Loading = 'Loading',
 	Success = 'Success',
 	Failed = 'Failed'
+}
+
+export enum AuthStatus {
+	Auth = 'Auth',
+	NoAuth = 'NoAuth',
+	Unknown = 'Unknown'
 }

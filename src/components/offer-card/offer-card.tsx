@@ -1,6 +1,10 @@
-import classNames from 'classnames'
 import { OfferCard as OfferCardType } from '../../types/offer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Toggler from '../favorites/toggler/toggler'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { toggleFavorite } from '../../store/thunks/favorite'
+import { AuthStatus } from '../../const'
+import { authSlice } from '../../store/slices/auth'
 
 type OfferCardProps = {
 	offer: OfferCardType
@@ -16,9 +20,19 @@ export default function OfferCard({
 	setActiveOfferId
 }: OfferCardProps): JSX.Element {
 	const { id, title, type, price, isFavorite, isPremium, rating, previewImage } = offer
+	const dispatch = useAppDispatch()
+	const authStatus = useAppSelector(authSlice.selectors.authStatus)
+	const navigate = useNavigate()
 
 	const handleMouseEnter = () => setActiveOfferId?.(id)
 	const handleMouseLeave = () => setActiveOfferId?.('')
+
+	const handleToggleFavorite = () => {
+		if (authStatus !== AuthStatus.Auth) {
+			return navigate('/login')
+		}
+		dispatch(toggleFavorite({ offerId: id, status: isFavorite ? 0 : 1 }))
+	}
 
 	return (
 		<article className={`${extraClassName}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -38,15 +52,7 @@ export default function OfferCard({
 						<b className="place-card__price-value">€{price}</b>
 						<span className="place-card__price-text">/&nbsp;night</span>
 					</div>
-					<button
-						className={classNames('place-card__bookmark-button button', { 'place-card__bookmark-button--active': isFavorite })}
-						type="button"
-					>
-						<svg className="place-card__bookmark-icon" width={18} height={19}>
-							<use xlinkHref="#icon-bookmark" />
-						</svg>
-						<span className="visually-hidden">To bookmarks</span>
-					</button>
+					<Toggler active={isFavorite} toggle={handleToggleFavorite} />
 				</div>
 				<div className="place-card__rating rating">
 					<div className="place-card__stars rating__stars">

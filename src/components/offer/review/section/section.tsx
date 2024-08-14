@@ -1,9 +1,10 @@
+import { AuthStatus } from '../../../../const'
 import { Review } from '../../../../types/review'
 import ReviewCard from '../card/card'
 import ReviewForm from '../form/form'
 
 type SectionProps = {
-	isLoggedIn: boolean
+	isLoggedIn: AuthStatus
 	reviews: Review[]
 }
 
@@ -18,7 +19,7 @@ export default function Section({ isLoggedIn, reviews }: SectionProps): JSX.Elem
 					<ReviewCard review={review} key={review.id} />
 				))}
 			</ul>
-			{isLoggedIn && <ReviewForm />}
+			{isLoggedIn === AuthStatus.Auth && <ReviewForm />}
 		</section>
 	)
 }

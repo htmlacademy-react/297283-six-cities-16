@@ -16,7 +16,7 @@ export default function Main(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const offers = useAppSelector(selectOffersByCityAndSorting)
 	const status = useAppSelector(offersSlice.selectors.status)
-	const isEmptyOffers = false
+	const city = useAppSelector(offersSlice.selectors.city)
 
 	const points: Point[] = offers.map((offer) => ({
 		id: offer.id,
@@ -26,8 +26,12 @@ export default function Main(): JSX.Element {
 	}))
 
 	useEffect(() => {
-		dispatch(fetchOffers())
-	}, [dispatch])
+		if (status === RequestStatus.Initial) {
+			dispatch(fetchOffers())
+		}
+	}, [dispatch, status])
+
+	const isEmptyOffers = status === RequestStatus.Success && offers.length === 0
 
 	return (
 		<div className="page page--gray page--main">
@@ -38,7 +42,7 @@ export default function Main(): JSX.Element {
 				<Tabs />
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
-						{isEmptyOffers ? <EmptyOffers /> : <Offers cards={offers} />}
+						{isEmptyOffers ? <EmptyOffers city={city} /> : <Offers cards={offers} />}
 						<div className="cities__right-section">{!isEmptyOffers && <Map points={points} />}</div>
 					</div>
 				</div>

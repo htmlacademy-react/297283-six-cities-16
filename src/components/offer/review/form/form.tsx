@@ -1,26 +1,46 @@
-import React, { useState } from 'react'
-
-type ReviewForm = {
-	rating: number
-	comment: string
-}
+import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
+import { ReviewForm as ReviewFormType } from '../../../../types/review'
+import { sendReview } from '../../../../store/thunks/reviews'
+import { useParams } from 'react-router-dom'
+import { reviewsSlice } from '../../../../store/slices/reviews'
+import { RequestStatus } from '../../../../const'
 
 const RATING_TITLES = ['terribly', 'badly', 'not bad', 'good', 'perfect'] as const
 
 export default function ReviewForm(): JSX.Element {
-	const [reviewForm, setReviewForm] = useState<ReviewForm>({
+	const { id } = useParams()
+	const dispatch = useAppDispatch()
+	const status = useAppSelector(reviewsSlice.selectors.status)
+	const form = useRef<HTMLFormElement>(null)
+	const [reviewForm, setReviewForm] = useState<ReviewFormType>({
 		rating: 0,
 		comment: ''
 	})
 
-	const isDisabledForm = !reviewForm.rating || reviewForm.comment.length < 50
+	const isDisabledForm = !reviewForm.rating || reviewForm.comment.length < 50 || reviewForm.comment.length > 300
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	useEffect(() => {
+		if (status === RequestStatus.Success) {
+			setReviewForm({ rating: 0, comment: '' })
+			if (form.current) {
+				form.current.reset()
+			}
+		}
+	}, [status])
+
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		dispatch(
+			sendReview({
+				body: reviewForm,
+				offerId: id!
+			})
+		)
 	}
 
 	return (
-		<form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
+		<form ref={form} className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
 			<label className="reviews__label form__label" htmlFor="review">
 				Your review
 			</label>

@@ -1,5 +1,5 @@
 import { CityName, Location } from './location'
-import { User } from './user'
+import { UserShort } from './user'
 
 export interface Offer {
 	id: string
@@ -21,7 +21,7 @@ export interface OfferFull extends Offer {
 	description: string
 	bedrooms: number
 	goods: string[]
-	host: User
+	host: UserShort
 	images: string[]
 	maxAdults: number
 }

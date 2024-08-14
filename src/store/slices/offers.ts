@@ -4,8 +4,9 @@ import { Offer } from '../../types/offer'
 import { SortingOptions } from '../../types/sorting'
 import { fetchOffers } from '../thunks/offers'
 import { RequestStatus } from '../../const'
+import { toggleFavorite } from '../thunks/favorite'
 
-interface InitialState {
+interface OffersState {
 	city: CityName
 	offers: Offer[]
 	sorting: SortingOptions
@@ -13,7 +14,7 @@ interface InitialState {
 	status: RequestStatus
 }
 
-const initialState: InitialState = {
+const initialState: OffersState = {
 	city: 'Paris',
 	offers: [],
 	sorting: 'popular',
@@ -25,9 +26,6 @@ export const offersSlice = createSlice({
 	name: 'offers',
 	initialState,
 	reducers: {
-		setOffers: (state, action: PayloadAction<Offer[]>) => {
-			state.offers = action.payload
-		},
 		setCity: (state, action: PayloadAction<CityName>) => {
 			state.city = action.payload
 		},
@@ -57,6 +55,12 @@ export const offersSlice = createSlice({
 			.addCase(fetchOffers.rejected, (state) => {
 				state.status = RequestStatus.Failed
 			})
+		builder.addCase(toggleFavorite.fulfilled, (state, action) => {
+			const offer = state.offers.find((item) => item.id === action.payload.id)
+			if (offer) {
+				offer.isFavorite = action.payload.isFavorite
+			}
+		})
 	}
 })
 
@@ -81,4 +85,4 @@ export const selectOffersByCityAndSorting = createSelector(
 			})
 )
 
-export const { setOffers, setCity, setSorting, setActiveOfferId } = offersSlice.actions
+export const { setCity, setSorting, setActiveOfferId } = offersSlice.actions
