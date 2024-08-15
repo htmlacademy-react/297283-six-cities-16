@@ -1,12 +1,16 @@
-import { Link } from 'react-router-dom'
 import Header from '../../components/header/header'
-import { FormEvent, useRef } from 'react'
+import { FormEvent, MouseEvent, useRef } from 'react'
 import { useAppDispatch } from '../../hooks/hooks'
 import { login } from '../../store/thunks/auth'
+import { CityName } from '../../types/location'
+import { setCity } from '../../store/slices/offers'
+import { LOCATIONS } from '../../const'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login(): JSX.Element {
 	const dispatch = useAppDispatch()
 	const formRef = useRef<HTMLFormElement>(null)
+	const navigate = useNavigate()
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -17,6 +21,14 @@ export default function Login(): JSX.Element {
 		const email = formData.get('email') as string
 		const password = formData.get('password') as string
 		dispatch(login({ email, password }))
+	}
+
+	const randomLocation = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)]
+
+	const handleClick = (e: MouseEvent, cityName: CityName) => {
+		e.preventDefault()
+		dispatch(setCity(cityName))
+		navigate('/')
 	}
 
 	return (
@@ -42,9 +54,9 @@ export default function Login(): JSX.Element {
 					</section>
 					<section className="locations locations--login locations--current">
 						<div className="locations__item">
-							<Link to="" className="locations__item-link">
-								<span>Amsterdam</span>
-							</Link>
+							<a href="#" onClick={(e) => handleClick(e, randomLocation.name)} className="locations__item-link">
+								<span>{randomLocation.name}</span>
+							</a>
 						</div>
 					</section>
 				</div>
