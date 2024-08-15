@@ -16,6 +16,5 @@ export interface Location {
 export interface Point {
 	id: string
 	title: string
-	latitude: number
-	longitude: number
+	location: Location
 }

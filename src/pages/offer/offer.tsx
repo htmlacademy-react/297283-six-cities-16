@@ -48,16 +48,7 @@ export default function Offer(): JSX.Element {
 		}
 	}, [dispatch, offer])
 
-	const points: Point[] = offer
-		? [offer, ...nearOffers]
-				.map((mapOffer) => ({
-					id: mapOffer.id,
-					title: mapOffer.title,
-					latitude: mapOffer.location.latitude,
-					longitude: mapOffer.location.longitude
-				}))
-				.slice(0, 4)
-		: []
+	const points: Point[] = offer ? [offer, ...nearOffers].slice(0, 4) : []
 
 	return (
 		<div className="page">

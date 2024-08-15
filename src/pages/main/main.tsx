@@ -6,7 +6,6 @@ import EmptyOffers from '../../components/main/empty-offers/empty-offers'
 import Map from '../../components/map/map'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { offersSlice, selectOffersByCityAndSorting } from '../../store/slices/offers'
-import { Point } from '../../types/location'
 import { useEffect } from 'react'
 import { fetchOffers } from '../../store/thunks/offers'
 import Loader from '../../components/loader/loader'
@@ -17,13 +16,6 @@ export default function Main(): JSX.Element {
 	const offers = useAppSelector(selectOffersByCityAndSorting)
 	const status = useAppSelector(offersSlice.selectors.status)
 	const city = useAppSelector(offersSlice.selectors.city)
-
-	const points: Point[] = offers.map((offer) => ({
-		id: offer.id,
-		title: offer.title,
-		latitude: offer.location.latitude,
-		longitude: offer.location.longitude
-	}))
 
 	useEffect(() => {
 		if (status === RequestStatus.Initial) {
@@ -43,7 +35,7 @@ export default function Main(): JSX.Element {
 				<div className="cities">
 					<div className={classNames('cities__places-container container', { 'cities__places-container--empty': isEmptyOffers })}>
 						{isEmptyOffers ? <EmptyOffers city={city} /> : <Offers cards={offers} />}
-						<div className="cities__right-section">{!isEmptyOffers && <Map points={points} />}</div>
+						<div className="cities__right-section">{!isEmptyOffers && <Map points={offers} />}</div>
 					</div>
 				</div>
 			</main>
