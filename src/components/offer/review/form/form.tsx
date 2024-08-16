@@ -18,8 +18,7 @@ export default function ReviewForm(): JSX.Element {
 		comment: ''
 	})
 
-	const isDisabledForm =
-		!reviewForm.rating || reviewForm.comment.length < 50 || reviewForm.comment.length > 300 || status === RequestStatus.Loading
+	const isDisabledForm = reviewForm.comment.length < 50 || reviewForm.comment.length > 300 || status === RequestStatus.Loading
 
 	useEffect(() => {
 		if (status === RequestStatus.Success) {
