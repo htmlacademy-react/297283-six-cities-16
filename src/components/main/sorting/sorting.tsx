@@ -25,20 +25,18 @@ export default function Sorting({ active, setSorting }: SortingProps): JSX.Eleme
 					<use xlinkHref="#icon-arrow-select" />
 				</svg>
 			</span>
-			{showList && (
-				<ul className="places__options places__options--custom places__options--opened">
-					{Object.entries(SORTING_OPTIONS_MAP).map(([key, value]) => (
-						<li
-							className={classNames('places__option', { 'places__option--active': key === active })}
-							tabIndex={0}
-							key={key}
-							onClick={() => handleClick(key as SortingOptions)}
-						>
-							{value}
-						</li>
-					))}
-				</ul>
-			)}
+			<ul className={classNames('places__options places__options--custom', { 'places__options--opened': showList })}>
+				{Object.entries(SORTING_OPTIONS_MAP).map(([key, value]) => (
+					<li
+						className={classNames('places__option', { 'places__option--active': key === active })}
+						tabIndex={0}
+						key={key}
+						onClick={() => handleClick(key as SortingOptions)}
+					>
+						{value}
+					</li>
+				))}
+			</ul>
 		</form>
 	)
 }
