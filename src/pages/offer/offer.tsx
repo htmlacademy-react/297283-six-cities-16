@@ -17,6 +17,7 @@ import { reviewsSlice } from '../../store/slices/reviews'
 import { Point } from '../../types/location'
 import { authSlice } from '../../store/slices/auth'
 import { RequestStatus } from '../../const'
+import { Review } from '../../types/review'
 
 export default function Offer(): JSX.Element {
 	const dispatch = useAppDispatch()
@@ -49,6 +50,7 @@ export default function Offer(): JSX.Element {
 	}, [dispatch, offer])
 
 	const points: Point[] = offer ? [offer, ...nearOffers].slice(0, 4) : []
+	const reviewsSorted: Review[] = reviews.toSorted((a, b) => +new Date(b.date) - +new Date(a.date))
 
 	return (
 		<div className="page">
@@ -63,7 +65,7 @@ export default function Offer(): JSX.Element {
 							<div className="offer__wrapper">
 								<Info offer={offer} />
 								<Host host={offer.host} description={offer.description} />
-								<Reviews isLoggedIn={authStatus} reviews={reviews} />
+								<Reviews isLoggedIn={authStatus} reviews={reviewsSorted} />
 							</div>
 						</div>
 						<Map points={points} extraClassName="offer" />
