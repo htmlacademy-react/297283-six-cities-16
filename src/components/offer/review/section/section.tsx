@@ -15,7 +15,7 @@ export default function Section({ isLoggedIn, reviews }: SectionProps): JSX.Elem
 				Reviews · <span className="reviews__amount">{reviews.length}</span>
 			</h2>
 			<ul className="reviews__list">
-				{reviews.map((review) => (
+				{reviews.slice(0, 10).map((review) => (
 					<ReviewCard review={review} key={review.id} />
 				))}
 			</ul>

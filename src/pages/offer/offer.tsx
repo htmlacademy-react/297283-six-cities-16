@@ -25,7 +25,7 @@ export default function Offer(): JSX.Element {
 	const status = useAppSelector(offerSlice.selectors.status)
 	const offer = useAppSelector(offerSlice.selectors.offer)
 	const nearOffers = useAppSelector(offerSlice.selectors.nearOffers)
-	const rewiews = useAppSelector(reviewsSlice.selectors.reviews)
+	const reviews = useAppSelector(reviewsSlice.selectors.reviews)
 	const navigate = useNavigate()
 
 	useEffect(() => {
@@ -63,7 +63,7 @@ export default function Offer(): JSX.Element {
 							<div className="offer__wrapper">
 								<Info offer={offer} />
 								<Host host={offer.host} description={offer.description} />
-								<Reviews isLoggedIn={authStatus} reviews={rewiews} />
+								<Reviews isLoggedIn={authStatus} reviews={reviews} />
 							</div>
 						</div>
 						<Map points={points} extraClassName="offer" />
