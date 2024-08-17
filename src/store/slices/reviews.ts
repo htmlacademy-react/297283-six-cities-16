@@ -43,7 +43,7 @@ export const reviewsSlice = createSlice({
 			})
 			.addCase(sendReview.fulfilled, (state, action) => {
 				state.status = RequestStatus.Success
-				state.reviews.push(action.payload)
+				state.reviews.unshift(action.payload)
 			})
 			.addCase(sendReview.rejected, (state) => {
 				state.status = RequestStatus.Failed
