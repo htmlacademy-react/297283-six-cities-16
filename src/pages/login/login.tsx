@@ -23,10 +23,9 @@ export default function Login(): JSX.Element {
 		const email = formData.get('email') as string
 		const password = formData.get('password') as string
 		const isValidPassword = PASSWORD_REG_EXP.test(password)
-		if (!isValidPassword) {
-			return
+		if (isValidPassword) {
+			dispatch(login({ email, password }))
 		}
-		dispatch(login({ email, password }))
 	}
 
 	const randomLocation = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)]
