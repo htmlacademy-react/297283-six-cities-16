@@ -6,6 +6,7 @@ import { CityName } from '../../types/location'
 import { setCity } from '../../store/slices/offers'
 import { LOCATIONS } from '../../const'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const PASSWORD_REG_EXP = /^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/
 
@@ -25,6 +26,8 @@ export default function Login(): JSX.Element {
 		const isValidPassword = PASSWORD_REG_EXP.test(password)
 		if (isValidPassword) {
 			dispatch(login({ email, password }))
+		} else {
+			toast.error('Пароль невалидный')
 		}
 	}
 
