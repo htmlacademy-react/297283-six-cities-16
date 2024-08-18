@@ -14,7 +14,7 @@ export default function Offers({ cards }: OffersProps): JSX.Element {
 	const dispatch = useAppDispatch()
 	const sorting = useAppSelector(offersSlice.selectors.sorting)
 	const activeCityName = useAppSelector(offersSlice.selectors.city)
-	const ending = getEnding(cards.length, ['place', 'places', 'places'])
+	const ending = getEnding(cards.length, 'place', 'places')
 	const placesFound = `${cards.length} ${ending} to stay in ${activeCityName}`
 
 	return (
