@@ -1,6 +1,5 @@
 import OfferCard from '../../offer-card/offer-card'
 import { Offer } from '../../../types/offer'
-import { OFFERS_NUMBER } from '../../../const'
 import Sorting from '../sorting/sorting'
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
 import { offersSlice, setActiveOfferId, setSorting } from '../../../store/slices/offers'
@@ -23,7 +22,7 @@ export default function Offers({ cards }: OffersProps): JSX.Element {
 			<b className="places__found">{placesFound}</b>
 			<Sorting active={sorting} setSorting={(option) => dispatch(setSorting(option))} />
 			<div className="cities__places-list places__list tabs__content">
-				{cards.slice(0, OFFERS_NUMBER).map((card) => (
+				{cards.map((card) => (
 					<OfferCard key={card.id} offer={card} setActiveOfferId={(id) => dispatch(setActiveOfferId(id))} />
 				))}
 			</div>
