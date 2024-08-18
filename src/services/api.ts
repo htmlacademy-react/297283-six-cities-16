@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosInstance, isAxiosError } from 'axios'
+import axios, { AxiosInstance, isAxiosError } from 'axios'
 import { getToken } from './token'
 import { toast } from 'sonner'
 
@@ -7,20 +7,14 @@ enum ErrorType {
 	Validation = 'VALIDATION_ERROR'
 }
 
-interface ErrorBody {
+interface ErrorResponse {
 	errorType: ErrorType
 	message: string
-	details: [
-		{
-			property: string
-			value: string
-			messages: [string]
-		}
-	]
-}
-
-function isAxiosErrorCustom<T>(error: unknown): error is AxiosError<T> {
-	return isAxiosError(error)
+	details: {
+		property: string
+		value: string
+		messages: string[]
+	}[]
 }
 
 const API_URL = 'https://16.design.htmlacademy.pro/six-cities'
@@ -42,7 +36,7 @@ export const createAPI = (): AxiosInstance => {
 	})
 
 	api.interceptors.response.use(null, (error) => {
-		if (isAxiosErrorCustom<ErrorBody>(error)) {
+		if (isAxiosError<ErrorResponse>(error)) {
 			const errorResponse = error.response
 			if (errorResponse) {
 				if (errorResponse.status >= 500) {
