@@ -18,7 +18,8 @@ export default function ReviewForm(): JSX.Element {
 		comment: ''
 	})
 
-	const isDisabledForm = reviewForm.comment.length < 50 || reviewForm.comment.length > 300 || status === RequestStatus.Loading
+	const isDisabledForm =
+		reviewForm.rating === 0 || reviewForm.comment.length < 50 || reviewForm.comment.length > 300 || status === RequestStatus.Loading
 
 	useEffect(() => {
 		if (status === RequestStatus.Success) {
@@ -55,6 +56,7 @@ export default function ReviewForm(): JSX.Element {
 							id={`${i + 1}-stars`}
 							type="radio"
 							disabled={status === RequestStatus.Loading}
+							checked={reviewForm.rating === i + 1}
 						/>
 						<label htmlFor={`${i + 1}-stars`} className="reviews__rating-label form__rating-label" title={title}>
 							<svg className="form__star-image" width={37} height={33}>

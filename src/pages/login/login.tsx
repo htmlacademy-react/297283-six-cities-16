@@ -6,6 +6,7 @@ import { CityName } from '../../types/location'
 import { setCity } from '../../store/slices/offers'
 import { LOCATIONS } from '../../const'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const PASSWORD_REG_EXP = /^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/
 
@@ -23,10 +24,11 @@ export default function Login(): JSX.Element {
 		const email = formData.get('email') as string
 		const password = formData.get('password') as string
 		const isValidPassword = PASSWORD_REG_EXP.test(password)
-		if (!isValidPassword) {
-			return
+		if (isValidPassword) {
+			dispatch(login({ email, password }))
+		} else {
+			toast.error('Пароль невалидный')
 		}
-		dispatch(login({ email, password }))
 	}
 
 	const randomLocation = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)]

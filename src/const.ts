@@ -1,7 +1,5 @@
 import leaflet from 'leaflet'
 
-export const OFFERS_NUMBER = 6
-
 export const DEFAULT_CUSTOM_ICON = leaflet.icon({
 	iconUrl: '/img/pin.svg',
 	iconSize: [27, 39],
