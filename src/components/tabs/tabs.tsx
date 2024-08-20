@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
 import { offersSlice } from '../../store/slices/offers'
 import { setCity } from '../../store/slices/offers'
 import { CityName } from '../../types/location'
+import { Link } from 'react-router-dom'
 
 export default function Tabs(): JSX.Element {
 	const dispatch = useAppDispatch()
@@ -21,13 +22,13 @@ export default function Tabs(): JSX.Element {
 				<ul className="locations__list tabs__list">
 					{LOCATIONS.map((location) => (
 						<li className="locations__item" key={location.name}>
-							<a
+							<Link
 								className={classNames('locations__item-link tabs__item', { 'tabs__item--active': location.name === activeCityName })}
-								href="#"
+								to="#"
 								onClick={(e) => handleClick(e, location.name)}
 							>
 								<span>{location.name}</span>
-							</a>
+							</Link>
 						</li>
 					))}
 				</ul>

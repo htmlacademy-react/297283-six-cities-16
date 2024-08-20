@@ -50,9 +50,9 @@ export default function Header({ showNav = true }: HeaderProps): JSX.Element {
 											</Link>
 										</li>
 										<li className="header__nav-item">
-											<a className="header__nav-link" href="#" onClick={handleSignOut}>
+											<Link className="header__nav-link" to="#" onClick={handleSignOut}>
 												<span className="header__signout">Sign out</span>
-											</a>
+											</Link>
 										</li>
 									</>
 								) : (
