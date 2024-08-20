@@ -5,6 +5,7 @@ import Login from './pages/login/login'
 import Offer from './pages/offer/offer'
 import NotFound from './pages/not-found/not-found'
 import ProtectedRoute from './components/protected-route/protected-route'
+import { RoutePath } from './const'
 
 const router = createBrowserRouter([
 	{
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
 				index: true
 			},
 			{
-				path: 'login',
+				path: RoutePath.Login,
 				element: (
 					<ProtectedRoute>
 						<Login />
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
 				)
 			},
 			{
-				path: 'favorites',
+				path: RoutePath.Favorite,
 				element: (
 					<ProtectedRoute auth>
 						<Favorites />
@@ -30,11 +31,11 @@ const router = createBrowserRouter([
 				)
 			},
 			{
-				path: 'offer/:id',
+				path: RoutePath.Offer,
 				element: <Offer />
 			},
 			{
-				path: '*',
+				path: RoutePath.Error,
 				element: <NotFound />
 			}
 		]
