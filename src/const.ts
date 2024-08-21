@@ -90,3 +90,11 @@ export enum AuthStatus {
 	NoAuth = 'NoAuth',
 	Unknown = 'Unknown'
 }
+
+export enum RoutePath {
+	Main = '/',
+	Login = 'login',
+	Favorite = 'favorites',
+	Offer = 'offer/:id',
+	Error = '*'
+}

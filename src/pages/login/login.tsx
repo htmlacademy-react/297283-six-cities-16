@@ -5,7 +5,7 @@ import { login } from '../../store/thunks/auth'
 import { CityName } from '../../types/location'
 import { setCity } from '../../store/slices/offers'
 import { LOCATIONS } from '../../const'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 const PASSWORD_REG_EXP = /^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/
@@ -62,9 +62,9 @@ export default function Login(): JSX.Element {
 					</section>
 					<section className="locations locations--login locations--current">
 						<div className="locations__item">
-							<a href="#" onClick={(e) => handleClick(e, randomLocation.name)} className="locations__item-link">
+							<Link className="locations__item-link" to="#" onClick={(e) => handleClick(e, randomLocation.name)}>
 								<span>{randomLocation.name}</span>
-							</a>
+							</Link>
 						</div>
 					</section>
 				</div>
